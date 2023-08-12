@@ -1,23 +1,23 @@
 import React from "react";
-import { CategoryItem, categories } from "./components";
+import { Root, Navbar, Contact } from "./constants/index";
 
-// import './styles/App.styles.scss';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
     return (
-        <>
-            <h1>What's on your mind?</h1>
-            <div className="categories-container">
-                {categories.map(item => {
-                    return (
-                        <CategoryItem 
-                            key={item.id} 
-                            {...item} 
-                        />
-                    );
-                })}
-            </div>
-        </>
+        <Router>
+            <Routes>
+                <Route path='/' element={<Navbar />}>
+                    <Route index element={<Root />} />
+
+                    <Route path='contact' element={<Contact />} />
+
+                    <Route path='signin' element={<h1>Signin here</h1>} />
+
+                    <Route path='*' element={<h1>Error!</h1>} />
+                </Route>
+            </Routes>
+        </Router>
     );
 }
 
