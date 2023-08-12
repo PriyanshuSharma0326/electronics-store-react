@@ -1,5 +1,5 @@
 import React from 'react'
-import { Directory, categories } from '../../constants';
+import { Directory, categories } from '../../constants/index';
 
 
 function Root() {

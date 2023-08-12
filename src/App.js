@@ -1,23 +1,21 @@
 import React from "react";
-import { Root, Navbar, Contact } from "./constants/index";
+import { Route, Routes } from 'react-router-dom';
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Contact, Error, Root, SharedLayout, SignIn } from './constants/index';
 
 function App() {
     return (
-        <Router>
-            <Routes>
-                <Route path='/' element={<Navbar />}>
-                    <Route index element={<Root />} />
+        <Routes>
+            <Route path='/' element={<SharedLayout />}>
+                <Route index element={<Root />} />
 
-                    <Route path='contact' element={<Contact />} />
+                <Route path='contact' element={<Contact />} />
 
-                    <Route path='signin' element={<h1>Signin here</h1>} />
+                <Route path='signin' element={<SignIn />} />
 
-                    <Route path='*' element={<h1>Error!</h1>} />
-                </Route>
-            </Routes>
-        </Router>
+                <Route path='*' element={<Error />} />
+            </Route>
+        </Routes>
     );
 }
 
