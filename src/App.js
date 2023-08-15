@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from 'react-router-dom';
 
-import { Contact, Error, Root, SharedLayout, SignIn } from './constants/index';
+import { AuthPage, Contact, Error, Root, SharedLayout } from './constants/index';
 
 function App() {
     return (
@@ -11,7 +11,7 @@ function App() {
 
                 <Route path='contact' element={<Contact />} />
 
-                <Route path='signin' element={<SignIn />} />
+                <Route path='signin' element={<AuthPage />} />
 
                 <Route path='*' element={<Error />} />
             </Route>
