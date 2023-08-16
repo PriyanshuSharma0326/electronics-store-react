@@ -29,7 +29,7 @@ function Navbar() {
 
                 <li>
                     <Link 
-                        to='/signin' 
+                        to='/accounts/auth' 
                         className='nav-link' 
                     >
                     Signin

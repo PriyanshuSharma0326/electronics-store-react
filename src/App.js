@@ -11,7 +11,7 @@ function App() {
 
                 <Route path='contact' element={<Contact />} />
 
-                <Route path='signin' element={<AuthPage />} />
+                <Route path='accounts/auth' element={<AuthPage />} />
 
                 <Route path='*' element={<Error />} />
             </Route>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { signUserIn } from '../../constants/index';
+import { createUserDoc, signUserIn } from '../../lib/config/firebase';
 
 function SignIn() {
     const signInHandler = async () => {
@@ -8,7 +8,9 @@ function SignIn() {
             alert(error.message);
         });
 
-        console.log(user);
+        const result = await createUserDoc(user);
+ 
+        console.log(result);
     }
 
     return (
