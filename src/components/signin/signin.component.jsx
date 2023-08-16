@@ -1,16 +1,21 @@
 import React from 'react';
-import { signInMethod } from '../../constants/index';
+import { signUserIn } from '../../constants/index';
 
 function SignIn() {
-    const SignInUser = () => {
-        signInMethod();
+    const signInHandler = async () => {
+        const { user } = await signUserIn()
+        .catch((error) => {
+            alert(error.message);
+        });
+
+        console.log(user);
     }
 
     return (
         <div>
             <h1>Sign in here</h1>
 
-            <button onClick={SignInUser}>Sign in with google</button>
+            <button onClick={signInHandler}>Sign in with google</button>
         </div>
     );
 }

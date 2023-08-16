@@ -5,6 +5,13 @@ import {
     signInWithPopup,
 } from 'firebase/auth';
 
+// import {
+//     getFirestore,
+//     doc,
+//     getDoc,
+//     setDoc,
+// } from 'firebase/firestore';
+
 const firebaseConfig = {
     apiKey: "AIzaSyCHACtIVBKPI40JqmcipbLqfjRxOp2QoFo",
     authDomain: "electronics-store-react.firebaseapp.com",
@@ -20,8 +27,14 @@ const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
 
-const signInMethod = () => {
-    signInWithPopup(auth, provider);
-}
+// const db = getFirestore(app);
 
-export { auth, signInMethod };
+const signUserIn = () => signInWithPopup(auth, provider);
+
+export {
+    auth,
+    provider,
+    signUserIn
+};
+
+// export default db;

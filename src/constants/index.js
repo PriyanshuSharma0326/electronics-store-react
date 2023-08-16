@@ -11,7 +11,11 @@ import Root from '../routes/root/root.route';
 import SharedLayout from '../routes/shared-layout/shared-layout';
 import AuthPage from '../routes/sign-in/authentication.route';
 
-import { auth, signInMethod } from '../lib/config/firebase';
+import {
+    auth,
+    provider,
+    signUserIn,
+} from '../lib/config/firebase';
 
 export {
     CategoryItem,
@@ -28,5 +32,6 @@ export {
     AuthPage,
 
     auth,
-    signInMethod,
+    provider,
+    signUserIn,
 };
