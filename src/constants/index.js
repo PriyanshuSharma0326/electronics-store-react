@@ -2,6 +2,7 @@ import CategoryItem from '../components/category-item/category-item.component';
 import Directory from '../components/directory/directory.component';
 import Navbar from '../components/navbar/navbar.component';
 import SignIn from '../components/signin/signin.component';
+import SignUp from '../components/signup/signup.component';
 
 import categories from './categories';
 
@@ -16,6 +17,7 @@ export {
     Directory,
     Navbar,
     SignIn,
+    SignUp,
 
     categories,
 
