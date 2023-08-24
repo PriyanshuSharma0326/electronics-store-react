@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './signin.styles.scss';
-import { createUserDoc, signUserIn } from '../../lib/config/firebase';
+import { createUserDoc, googlePopupSignIn, signInUserEmailPasswordMethod } from '../../lib/utils/firebase.util';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 import { useNavigate } from 'react-router-dom';
@@ -28,7 +28,20 @@ function SignIn() {
         e.preventDefault();
 
         if(formInputs.email && formInputs.password) {
-            // 
+            try {
+                await signInUserEmailPasswordMethod(formInputs.email, formInputs.password);
+
+                setFormInputs(defaultFormFields);
+            }
+            catch(err) {
+                if(err.code === 'auth/user-not-found') {
+                    alert('No user found with this email!');
+                }
+                else if(err.code === 'auth/wrong-password') {
+                    alert('Incorrect password!');
+                }
+                console.log('Error while signing in', err.code);
+            }
         }
         else {
             alert('All form fields are mandatory!');
@@ -36,15 +49,13 @@ function SignIn() {
         }
     }
 
-    const signInHandler = async () => {
-        const { user } = await signUserIn()
+    const googleSignInHandler = async () => {
+        const { user } = await googlePopupSignIn()
         .catch((error) => {
             alert(error.message);
         });
 
-        const result = await createUserDoc(user);
- 
-        console.log(result);
+        await createUserDoc(user);
     }
 
     return (
@@ -94,7 +105,7 @@ function SignIn() {
                             type='button' 
                             buttonType='google' 
                             buttonText='Sign In With Google' 
-                            onClick={signInHandler} 
+                            onClick={googleSignInHandler} 
                         />
                     </div>
                 </form>

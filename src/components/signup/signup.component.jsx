@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './signup.styles.scss';
-import { createUserDoc, createUserEmailPasswordMethod } from '../../lib/config/firebase';
+import { createUserDoc, createUserEmailPasswordMethod } from '../../lib/utils/firebase.util';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 import { useNavigate } from 'react-router-dom';
@@ -29,21 +29,12 @@ function SignUp() {
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        // Validation ->
-
-        // UserName Length
-        // Email Format
-        // Passwords Match
-        // Email Existence
-
         if(formInputs.displayName && formInputs.email && formInputs.password && formInputs.confirmPassword) {
             if(formInputs.password === formInputs.confirmPassword) {
                 try {
                     const { user } = await createUserEmailPasswordMethod(formInputs.email, formInputs.password);
 
-                    const result = await createUserDoc({...user, displayName: formInputs.displayName});
-
-                    setFormInputs(defaultFormFields);
+                    await createUserDoc({...user, displayName: formInputs.displayName});
                 }
                 catch(err) {
                     if(err.code === 'auth/invalid-email') {

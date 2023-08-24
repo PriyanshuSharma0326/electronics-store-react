@@ -11,6 +11,8 @@ import Error from '../routes/error/error.route';
 import Root from '../routes/root/root.route';
 import SharedLayout from '../routes/shared-layout/shared-layout';
 import AuthPage from '../routes/auth/authentication.route';
+import Account from '../routes/account/account.route';
+import Shop from '../routes/shop/shop.route';
 
 export {
     CategoryItem,
@@ -26,4 +28,6 @@ export {
     Root,
     SharedLayout,
     AuthPage,
+    Account,
+    Shop,
 };

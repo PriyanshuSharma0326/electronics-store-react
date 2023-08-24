@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './navbar.styles.scss';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../context/user-context';
 
 function Navbar() {
+    const { currentUser } = useContext(UserContext);
+
     return (
         <nav className='navbar'>
             <img className='nav-logo' src="https://pbs.twimg.com/profile_images/1052173628140212225/6NW8tCxY_400x400.png" alt="Logo" />
@@ -27,14 +30,24 @@ function Navbar() {
                     </Link>
                 </li>
 
-                <li>
-                    <Link 
-                        to='/accounts' 
-                        className='nav-link' 
-                    >
-                    Signin
-                    </Link>
-                </li>
+                {!currentUser ? (
+                    <li>
+                        <Link 
+                            to='/accounts' 
+                            className='nav-link' 
+                        >
+                        Login
+                        </Link>
+                    </li>) : (
+                    <li>
+                        <Link 
+                            to='/account' 
+                            className='nav-link' 
+                        >
+                        Account
+                        </Link>
+                    </li>
+                )}
 
                 <li>
                     <Link 

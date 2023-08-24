@@ -1,21 +1,21 @@
-$sub-color: grey;
+$sub-color: #6B728E;
 $main-color: black;
 
 @mixin shrinkLabel {
-    top: -0.875rem;
-    font-size: 0.75rem;
+    top: -1rem;
+    font-size: 0.9rem;
     color: $main-color;
 }
 
 .form-group {
     position: relative;
-    margin: 45px 0;
+    margin: 30px 0;
 
     .form-input {
         background: none;
         background-color: white;
         color: $sub-color;
-        font-size: 1.125rem;
+        font-size: 1.15rem;
         padding: 10px 10px 10px 5px;
         display: block;
         width: 100%;
