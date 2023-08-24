@@ -1,9 +1,18 @@
 import React from 'react';
 import './button.styles.scss';
 
-function Button({ buttonText, buttonType }) {
+const BUTTON_TYPE_CLASS = {
+    google: 'google-sign-in',
+    inverted: 'inverted',
+}
+
+function Button({ buttonText, type, buttonType, ...otherProps }) {
     return (
-        <button className="button-container" type={buttonType}>
+        <button 
+            className={`button-container ${BUTTON_TYPE_CLASS[buttonType]}`} 
+            type={type} 
+            {...otherProps} 
+        >
             {buttonText}
         </button>
     )

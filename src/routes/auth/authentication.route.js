@@ -1,13 +1,11 @@
 import React from 'react';
 import './authentication.styles.scss';
-import { SignIn, SignUp } from '../../constants';
+import { Outlet } from 'react-router-dom';
 
 function AuthPage() {
     return (
-        <div>
-            <SignIn />
-
-            <SignUp />
+        <div className='auth-page-container'>
+            <Outlet />
         </div>
     );
 }

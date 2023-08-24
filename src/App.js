@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from 'react-router-dom';
 
-import { AuthPage, Contact, Error, Root, SharedLayout } from './constants/index';
+import { AuthPage, Contact, Error, Root, SharedLayout, SignIn, SignUp } from './constants/index';
 
 function App() {
     return (
@@ -11,7 +11,13 @@ function App() {
 
                 <Route path='contact' element={<Contact />} />
 
-                <Route path='accounts/auth' element={<AuthPage />} />
+                <Route path='accounts' element={<AuthPage />}>
+                    <Route index element={<SignIn />} />
+
+                    <Route path='login' element={<SignIn />} />
+
+                    <Route path='register' element={<SignUp />} />
+                </Route>
 
                 <Route path='*' element={<Error />} />
             </Route>
