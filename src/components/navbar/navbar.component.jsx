@@ -3,13 +3,29 @@ import './navbar.styles.scss';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/user-context';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { CartContext } from '../../context/cart-context';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+
 function Navbar() {
     const { currentUser } = useContext(UserContext);
 
+    const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+
+    const cartButtonHandler = () => {
+        setIsCartOpen(!isCartOpen);
+    }
+
     return (
         <nav className='navbar'>
-            <img className='nav-logo' src="https://pbs.twimg.com/profile_images/1052173628140212225/6NW8tCxY_400x400.png" alt="Logo" />
-            <h1 className='nav-title'>G-Electronics</h1>
+            <Link 
+                to='/' 
+                className='nav-link' 
+            >
+                <img className='nav-logo' src="https://pbs.twimg.com/profile_images/1052173628140212225/6NW8tCxY_400x400.png" alt="Logo" />
+                <h1 className='nav-title'>G-Electronics</h1>
+            </Link>
 
             <ul className="nav-links-container">
                 <li>
@@ -50,14 +66,14 @@ function Navbar() {
                 )}
 
                 <li>
-                    <Link 
-                        to='/cart' 
-                        className='nav-link' 
-                    >
-                    Cart
-                    </Link>
+                    <div className="cart-icon-container" onClick={cartButtonHandler}>
+                        <FontAwesomeIcon className='icon' icon={faCartShopping} />
+                        <span>0</span>
+                    </div>
                 </li>
             </ul>
+
+            {isCartOpen && <CartDropdown />}
         </nav>
     )
 }

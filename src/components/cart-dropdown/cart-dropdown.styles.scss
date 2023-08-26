@@ -1,0 +1,31 @@
+$grey: #6B728E;
+
+.cart-dropdown-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    width: 18rem;
+    background-color: var(--white);
+    position: absolute;
+    right: 8rem;
+    top: 6rem;
+    border: 1px solid $grey;
+    
+    .link {
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+    }
+
+    .cart-dropdown-items {
+        height: 12rem;
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+    }
+
+    @media (max-width: 768px) {
+        right: 2rem;
+    }
+}

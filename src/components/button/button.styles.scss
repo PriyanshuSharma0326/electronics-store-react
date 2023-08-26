@@ -11,14 +11,16 @@
     display: flex;
     justify-content: center;
     border-radius: 0.5rem;
+    box-sizing: border-box;
+    border: 1px solid black;
 
     &:hover {
         background-color: white;
         color: black;
-        border: 1px solid black;
     }
 
     &.google-sign-in {
+        border: none;
         background-color: #4285f4;
         color: white;
 

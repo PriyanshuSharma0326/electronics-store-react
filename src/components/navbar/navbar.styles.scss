@@ -1,9 +1,17 @@
 .navbar {
     display: flex;
     align-items: center;
-    padding: 1rem 10rem;
+    padding: 1rem 8rem;
     background-color: var(--dark);
     height: 5rem;
+    box-shadow: 0 0 12px var(--dark);
+    position: relative;
+
+    .nav-link {
+        text-decoration: none;
+        color: var(--white);
+        display: flex;
+    }
 
     .nav-logo {
         width: 2.75rem;
@@ -17,6 +25,7 @@
 
     .nav-links-container {
         display: flex;
+        align-items: center;
         gap: 1.5rem;
         margin-left: auto;
 
@@ -24,12 +33,31 @@
             list-style: none;
             cursor: pointer;
 
-            .nav-link {
-                text-decoration: none;
-                color: var(--white);
+            .cart-icon-container {
+                position: relative;
+                cursor: pointer;
+
+                .icon {
+                    display: block;
+                    font-size: 1.85rem;
+                    color: white;
+                }
+
+                span {
+                    position: absolute;
+                    top: 35%;
+                    left: 55%;
+                    transform: translate(-50%, -50%);
+                    font-weight: 700;
+                    color: var(--dark);
+                    font-size: 0.75rem;
+                    user-select: none;
+                }
             }
         }
     }
 
-    box-shadow: 0 0 12px var(--dark);
+    @media (max-width: 768px) {
+        padding: 1rem 2rem;
+    }
 }
