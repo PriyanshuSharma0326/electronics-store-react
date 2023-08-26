@@ -23,8 +23,8 @@ function Navbar() {
                 to='/' 
                 className='nav-link' 
             >
-                <img className='nav-logo' src="https://pbs.twimg.com/profile_images/1052173628140212225/6NW8tCxY_400x400.png" alt="Logo" />
-                <h1 className='nav-title'>G-Electronics</h1>
+                <img className='nav-logo' src="https://purepng.com/public/uploads/large/google-stadia-logo-3cx.png" alt="Logo" />
+                <h1 className='nav-title'>CircuitCart</h1>
             </Link>
 
             <ul className="nav-links-container">
