@@ -19,10 +19,15 @@ $grey: #6B728E;
     }
 
     .cart-dropdown-items {
-        height: 12rem;
+        height: 14rem;
         display: flex;
         flex-direction: column;
+        gap: 1rem;
         overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 
     @media (max-width: 768px) {

@@ -11,7 +11,7 @@ import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 function Navbar() {
     const { currentUser } = useContext(UserContext);
 
-    const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+    const { isCartOpen, setIsCartOpen, cartCount } = useContext(CartContext);
 
     const cartButtonHandler = () => {
         setIsCartOpen(!isCartOpen);
@@ -68,7 +68,7 @@ function Navbar() {
                 <li>
                     <div className="cart-icon-container" onClick={cartButtonHandler}>
                         <FontAwesomeIcon className='icon' icon={faCartShopping} />
-                        <span>0</span>
+                        <span>{cartCount}</span>
                     </div>
                 </li>
             </ul>
