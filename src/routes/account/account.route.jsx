@@ -11,7 +11,7 @@ function Account() {
     }
 
     return (
-        <div>
+        <div style={{marginTop: '10rem'}}>
             <h1>Your Account Info</h1>
 
             <button onClick={signOutHandler}>Sign Out</button>
@@ -19,4 +19,4 @@ function Account() {
     )
 }
 
-export default Account
+export default Account;

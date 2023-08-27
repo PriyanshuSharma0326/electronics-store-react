@@ -1,17 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './authentication.styles.scss';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { UserContext } from '../../context/user-context';
+import { Outlet } from 'react-router-dom';
 
 function AuthPage() {
-    const { currentUser } = useContext(UserContext);
-
-    const navigate = useNavigate();
-
-    if(currentUser) {
-        navigate('/shop');
-    }
-
     return (
         <div className='auth-page-container'>
             <Outlet />

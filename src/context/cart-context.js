@@ -6,7 +6,7 @@ export const CartContext = createContext({
 });
 
 export const CartContextProvider = ({ children }) => {
-    const [isCartOpen, setIsCartOpen] = useState(true);
+    const [isCartOpen, setIsCartOpen] = useState(false);
 
     const contextValue = {
         isCartOpen,

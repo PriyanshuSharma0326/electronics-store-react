@@ -5,7 +5,9 @@
     background-color: var(--dark);
     height: 5rem;
     box-shadow: 0 0 12px var(--dark);
-    position: relative;
+    position: fixed;
+    top: 0;
+    width: 100vw;
 
     .nav-link {
         text-decoration: none;

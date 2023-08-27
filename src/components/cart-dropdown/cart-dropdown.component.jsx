@@ -9,11 +9,11 @@ function CartDropdown() {
             <div className="cart-dropdown-items"></div>
             
             <Link
-                to='/checkout' 
+                to='/cart' 
                 className='link'
             >
                 <Button 
-                    buttonText='Go to checkout' 
+                    buttonText='Go to cart' 
                     type='button' 
                 />
             </Link>
