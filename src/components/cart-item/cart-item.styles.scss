@@ -3,10 +3,9 @@ $grey: #6B728E;
 .cart-product-container {
     width: 100%;
     display: flex;
-    border-top: 1px solid $grey;
     border-bottom: 1px solid $grey;
-    height: 14rem;
-    padding: 1rem 0;
+    height: 13rem;
+    padding-bottom: 1rem;
 
     .product-image-container {
         height: 100%;
@@ -21,6 +20,9 @@ $grey: #6B728E;
     .cart-product-details {
         width: 70%;
         font-size: 0.85rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
 
         h2 {
             font-weight: 500;
@@ -28,6 +30,10 @@ $grey: #6B728E;
 
         .price {
             font-weight: 700;
+        }
+
+        .more-options {
+            margin-top: auto;
         }
     }
 }

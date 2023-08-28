@@ -6,6 +6,7 @@ $grey: #6B728E;
     margin: 0 auto;
     margin-top: 7.5rem;
     width: 90%;
+    padding-bottom: 2.5rem;
 
     .cart-container {
         width: 70%;
@@ -16,10 +17,14 @@ $grey: #6B728E;
         flex-direction: column;
         gap: 1.5rem;
 
-        h1 {
-            font-size: 1.75rem;
-            font-weight: 500;
-        }
+        .cart-container-header {
+            border-bottom: 1px solid $grey;
+            
+            h1 {
+                font-size: 1.75rem;
+                font-weight: 500;
+            }
+        }        
 
         .cart-subtotal {
             height: fit-content;

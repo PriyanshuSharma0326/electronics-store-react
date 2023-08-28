@@ -17,6 +17,7 @@ import SharedLayout from '../routes/shared-layout/shared-layout';
 import AuthPage from '../routes/auth/authentication.route';
 import Account from '../routes/account/account.route';
 import Shop from '../routes/shop/shop.route';
+import Cart from '../routes/cart/cart.route';
 
 export {
     CategoryItem,
@@ -38,4 +39,5 @@ export {
     AuthPage,
     Account,
     Shop,
+    Cart,
 };

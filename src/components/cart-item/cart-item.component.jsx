@@ -1,5 +1,6 @@
 import React from 'react';
 import './cart-item.styles.scss';
+import Button from '../button/button.component';
 
 function CartItem({ item }) {
     const { name, imageURL, price, quantity } = item;
@@ -15,7 +16,12 @@ function CartItem({ item }) {
 
                 <h2 className='price'>${price}</h2>
 
-                {/* <h2 className=''>details</h2> */}
+                <h2 className='more-options'>
+                    <Button 
+                        buttonText='Delete' 
+                        buttonType='simple' 
+                    />
+                </h2>
             </div>
         </div>
     )

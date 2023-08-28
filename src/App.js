@@ -9,10 +9,11 @@ import {
     SharedLayout,
     Shop,
     SignIn,
-    SignUp
+    SignUp,
+    Cart
 } from './constants/index';
 import { UserContext } from "./context/user-context";
-import Cart from "./routes/cart/cart.component";
+// import Cart from "./routes/cart/cart.route";
 
 function App() {
     const { currentUser } = useContext(UserContext);

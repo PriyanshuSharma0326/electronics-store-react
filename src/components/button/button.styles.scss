@@ -41,4 +41,17 @@
             border: none;
         }
     }
+
+    &.simple {
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding: 0;
+        background-color: white;
+        color: var(--dark);
+        border: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
