@@ -1,0 +1,33 @@
+$grey: #6B728E;
+
+.cart-product-container {
+    width: 100%;
+    display: flex;
+    border-top: 1px solid $grey;
+    border-bottom: 1px solid $grey;
+    height: 14rem;
+    padding: 1rem 0;
+
+    .product-image-container {
+        height: 100%;
+        width: 30%;
+        text-align: center;
+
+        img {
+            height: 100%;
+        }
+    }
+
+    .cart-product-details {
+        width: 70%;
+        font-size: 0.85rem;
+
+        h2 {
+            font-weight: 500;
+        }
+
+        .price {
+            font-weight: 700;
+        }
+    }
+}

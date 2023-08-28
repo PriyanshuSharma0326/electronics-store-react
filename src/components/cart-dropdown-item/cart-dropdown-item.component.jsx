@@ -12,7 +12,7 @@ function CartDropdownItem({ name, quantity, imageURL, price }) {
                 <span className='name'>{name}</span>
 
                 <span className='price'>
-                    {quantity} * ${price}
+                    {quantity} &#215; ${price}
                 </span>
             </div>
         </div>

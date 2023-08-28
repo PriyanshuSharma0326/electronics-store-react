@@ -4,6 +4,8 @@ import Navbar from '../components/navbar/navbar.component';
 import SignIn from '../components/signin/signin.component';
 import SignUp from '../components/signup/signup.component';
 import ProductCard from '../components/product-card/product-card.component';
+import CartItem from '../components/cart-item/cart-item.component';
+import Button from '../components/button/button.component';
 
 import categories from './categories';
 import productsList from './products-list';
@@ -23,6 +25,8 @@ export {
     SignIn,
     SignUp,
     ProductCard,
+    CartItem,
+    Button,
 
     categories,
     productsList,

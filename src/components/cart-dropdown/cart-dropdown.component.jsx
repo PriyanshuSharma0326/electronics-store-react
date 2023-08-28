@@ -6,7 +6,7 @@ import CartDropdownItem from '../cart-dropdown-item/cart-dropdown-item.component
 import { CartContext } from '../../context/cart-context';
 
 function CartDropdown() {
-    const { cartItems } = useContext(CartContext);
+    const { cartItems, isCartOpen, setIsCartOpen } = useContext(CartContext);
 
     return (
         <div className='cart-dropdown-container'>
@@ -28,6 +28,7 @@ function CartDropdown() {
                 <Button 
                     buttonText='Go to cart' 
                     type='button' 
+                    onClick={() => setIsCartOpen(!isCartOpen)} 
                 />
             </Link>
         </div>
