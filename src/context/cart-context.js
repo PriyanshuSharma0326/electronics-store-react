@@ -8,13 +8,13 @@ export const CartContext = createContext({
 const addItem = (cartItems, item) => {
     const itemSnapshot = cartItems.find((cartItem) => cartItem.id === item.id);
 
-    // console.log(itemSnapshot);
+    console.log(itemSnapshot);
 
     if(itemSnapshot) {
         return cartItems.map((cartItem) => {
-            // console.log(cartItem);
+            console.log(cartItem);
             if(cartItem.id === item.id) {
-                return {...cartItem, quantity: cartItem.quantity + 1}
+                return {...cartItem, quantity: cartItem.quantity + 1};
             }
             else {
                 return cartItem;
@@ -26,7 +26,23 @@ const addItem = (cartItems, item) => {
     }
 };
 
-const removeItem = (cartItems, item) => {};
+const removeItem = (cartItems, item) => {
+    const itemSnapshot = cartItems.find((cartItem) => cartItem.id === item.id);
+
+    if(itemSnapshot.quantity === 1) {
+        return clearItem(cartItems, item);
+    }
+    else {
+        return cartItems.map((cartItem) => {
+            if(cartItem.id === item.id) {
+                return {...cartItem, quantity: cartItem.quantity - 1}
+            }
+            else {
+                return cartItem;
+            }
+        })
+    }
+};
 
 const clearItem = (cartItems, item) => {
     return cartItems.filter((cartItem) => cartItem.id !== item.id);

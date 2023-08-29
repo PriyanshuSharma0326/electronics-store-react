@@ -4,7 +4,11 @@ import { CartContext } from '../../context/cart-context';
 import { CartItem, Button } from '../../constants/index';
 
 function Cart() {
-    const { cartItems, cartCount, cartTotal } = useContext(CartContext);
+    const { cartItems, cartCount, cartTotal, setCartItems } = useContext(CartContext);
+
+    const clearCart = () => {
+        setCartItems([]);
+    }
 
     const total = (cartTotal).toLocaleString('en-US', {
         minimumFractionDigits: 2,
@@ -20,6 +24,7 @@ function Cart() {
                     <Button 
                         buttonText='Deselect all items' 
                         buttonType='simple' 
+                        onClick={clearCart} 
                     />
                 </div>
 
@@ -28,6 +33,7 @@ function Cart() {
                         <CartItem 
                             key={item.id} 
                             item={item} 
+                            id={item.id} 
                         />
                     )
                 })}
