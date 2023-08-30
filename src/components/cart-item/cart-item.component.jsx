@@ -4,7 +4,6 @@ import Button from '../button/button.component';
 import { CartContext } from '../../context/cart-context';
 
 function CartItem({ item }) {
-
     const {
         addProductToCart,
         removeProductFromCart,
@@ -17,6 +16,10 @@ function CartItem({ item }) {
 
     const minusButtonHandler = () => {
         removeProductFromCart(item);
+    }
+
+    const deleteItemFromCart = () => {
+        clearProductFromCart(item);
     }
 
     return (
@@ -34,7 +37,7 @@ function CartItem({ item }) {
                     <Button 
                         buttonText='Delete' 
                         buttonType='simple' 
-                        onClick={clearProductFromCart} 
+                        onClick={deleteItemFromCart} 
                     />
                 </h2>
             </div>
