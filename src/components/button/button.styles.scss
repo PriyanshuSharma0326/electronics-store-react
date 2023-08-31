@@ -55,4 +55,13 @@
             text-decoration: underline;
         }
     }
+
+    &.icon {
+        border-radius: 50%;
+        width: 2.75rem;
+        height: 2.75rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }

@@ -1,10 +1,13 @@
 import React from 'react';
 import './button.styles.scss';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 const BUTTON_TYPE_CLASS = {
     google: 'google-sign-in',
     inverted: 'inverted',
-    simple: 'simple'
+    simple: 'simple',
+    icon: 'icon'
 }
 
 function Button({ buttonText, type, buttonType, ...otherProps }) {
@@ -14,7 +17,9 @@ function Button({ buttonText, type, buttonType, ...otherProps }) {
             type={type} 
             {...otherProps} 
         >
-            {buttonText}
+            {buttonType !== 'icon' && buttonText}
+
+            {buttonType === 'icon' && <FontAwesomeIcon icon={otherProps.icon} />}
         </button>
     )
 }

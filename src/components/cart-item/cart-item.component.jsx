@@ -3,6 +3,8 @@ import './cart-item.styles.scss';
 import Button from '../button/button.component';
 import { CartContext } from '../../context/cart-context';
 
+import { faBucket, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+
 function CartItem({ item }) {
     const {
         addProductToCart,
@@ -45,14 +47,16 @@ function CartItem({ item }) {
             <div className="product-quantity-selection">
                 <Button 
                     buttonText='Plus' 
-                    buttonType='simple' 
+                    buttonType='icon' 
                     onClick={plusButtonHandler} 
+                    icon={faPlus} 
                 />
                 <h2>{item.quantity}</h2>
                 <Button 
                     buttonText='Minus' 
-                    buttonType='simple' 
+                    buttonType='icon' 
                     onClick={minusButtonHandler} 
+                    icon={item.quantity > 1 ? faMinus : faBucket} 
                 />
             </div>
         </div>
