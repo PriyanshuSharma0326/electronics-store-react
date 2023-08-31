@@ -3,7 +3,7 @@ import './product-card.styles.scss';
 import Button from '../button/button.component';
 import { CartContext } from '../../context/cart-context';
 
-function ProductCard({ product }) {
+function ProductCard({ product, discount }) {
     const { name, imageURL, price } = product;
 
     const { addProductToCart } = useContext(CartContext);
@@ -11,6 +11,8 @@ function ProductCard({ product }) {
     const addToCartButtonHandler = () => {
         addProductToCart(product);
     }
+
+    const discountedPrice = ((100-discount)/100)*price;
 
     return (
         <div className='product-card-container'>
@@ -20,7 +22,7 @@ function ProductCard({ product }) {
                 <img src={imageURL} alt={name} />
             </div>
 
-            <h2>Effective Price: <span>${price}</span></h2>
+            <h2>Price: <span className='actual-price'>${price}</span> <span>${discountedPrice}</span></h2>
 
             <Button 
                 buttonText='Add to cart' 

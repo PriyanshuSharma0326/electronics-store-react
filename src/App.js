@@ -13,7 +13,6 @@ import {
     Cart
 } from './constants/index';
 import { UserContext } from "./context/user-context";
-// import Cart from "./routes/cart/cart.route";
 
 function App() {
     const { currentUser } = useContext(UserContext);
@@ -39,7 +38,7 @@ function App() {
             <Route path='/' element={<SharedLayout />}>
                 <Route index element={<Root />} />
 
-                <Route path='shop' element={<Shop />} />
+                <Route path='shop/*' element={<Shop />} />
 
                 <Route path='contact' element={<Contact />} />
 

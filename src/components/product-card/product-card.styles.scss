@@ -25,6 +25,12 @@
         span {
             font-weight: 700;
         }
+
+        .actual-price {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: line-through;
+        }
     }
 
     .product-image-container {

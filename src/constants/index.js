@@ -6,6 +6,8 @@ import SignUp from '../components/signup/signup.component';
 import ProductCard from '../components/product-card/product-card.component';
 import CartItem from '../components/cart-item/cart-item.component';
 import Button from '../components/button/button.component';
+import CategoryPreview from '../components/category-preview/category-preview.component';
+import ShopCategories from '../components/shop-categories/shop-categories.component';
 
 import categories from './categories';
 import productsList from './products-list';
@@ -28,6 +30,8 @@ export {
     ProductCard,
     CartItem,
     Button,
+    CategoryPreview,
+    ShopCategories,
 
     categories,
     productsList,
