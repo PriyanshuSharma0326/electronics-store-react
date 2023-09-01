@@ -12,7 +12,7 @@ function ProductCard({ product, discount }) {
         addProductToCart(product);
     }
 
-    const discountedPrice = ((100-discount)/100)*price;
+    const discountedPrice = (((100-discount)/100)*price).toFixed(2);
 
     return (
         <div className='product-card-container'>

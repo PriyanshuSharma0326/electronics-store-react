@@ -9,11 +9,14 @@ function ShopCategories() {
     return (
         <div className='shop-categories-container'>
             {shop.map(shopCategory => {
-                return (<CategoryPreview 
-                    title={shopCategory.title} 
-                    products={shopCategory.products} 
-                    sale={shopCategory.saleAmount} 
-                />)
+                return (
+                    <CategoryPreview 
+                        key={shopCategory.id} 
+                        title={shopCategory.title} 
+                        products={shopCategory.products} 
+                        sale={shopCategory.saleAmount} 
+                    />
+                )
             })}
         </div>
     );

@@ -2,7 +2,7 @@ import React from 'react';
 import './category-item.styles.scss';
 import { useNavigate } from 'react-router-dom';
 
-function CategoryItem({ title, imageURL, amount, saleAmount }) {
+function CategoryItem({ title, imageURL, minAmount, saleAmount }) {
     const navigate = useNavigate();
 
     const routeHandler = (category) => {
@@ -20,7 +20,7 @@ function CategoryItem({ title, imageURL, amount, saleAmount }) {
             <div className="category-body-container">
                 <h2 className='title'>{title}</h2>
 
-                <h2 className='amount'>Starts from <span>${amount}</span></h2>
+                <h2 className='amount'>Starts from <span>${minAmount}</span></h2>
 
                 <div className="sale">
                     <h2>Sale {saleAmount}% off</h2>
