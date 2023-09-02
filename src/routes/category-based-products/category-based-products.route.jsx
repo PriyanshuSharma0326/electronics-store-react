@@ -1,7 +1,10 @@
 import React from 'react';
 import './category-based-products.styles.scss';
+import { useParams } from 'react-router-dom';
 
 function CategoryBasedProducts() {
+    const { category } = useParams();
+
     return (
         <div className='category-based-products-container'>
             {/* {shop.map((shopCategory) => {
@@ -15,7 +18,7 @@ function CategoryBasedProducts() {
                 )
             } */}
 
-            Category Based Products
+            Category Based Products - {category}
         </div>
     )
 }
