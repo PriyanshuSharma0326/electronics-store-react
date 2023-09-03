@@ -4,7 +4,6 @@ const shopData = [
         title: 'Mobiles & Tablets',
         imageURL: 'https://www.zdnet.com/a/img/resize/06119597d8fde27e3074dc3bb4a9ce0f1851280a/2023/04/24/4e586f53-afa2-452d-baf4-cc7c78c2c5fb/samsung-galaxy-a54-5g.jpg?auto=webp&fit=crop&height=900&width=1200',
         minAmount: 449,
-        saleAmount: 12,
         products: [
             {
                 id: 1,
@@ -61,7 +60,6 @@ const shopData = [
         title: 'Televisions',
         imageURL: 'https://cdn.siasat.com/wp-content/uploads/2020/06/realme-TV.jpg',
         minAmount: 799,
-        saleAmount: 9,
         products: [
             {
                 id: 9,
@@ -118,7 +116,6 @@ const shopData = [
         title: 'Laptops',
         imageURL: 'https://static.independent.co.uk/2022/11/26/21/Laptops%20BF%201%20copy.jpg?quality=75&width=1200&auto=webp',
         minAmount: 999,
-        saleAmount: 8,
         products: [
             {
                 id: 17,
@@ -175,7 +172,6 @@ const shopData = [
         title: 'Washing Machines',
         imageURL: 'https://www.businessinsider.in/photo/88535108/large-capacity-fully-automatic-washing-machine.jpg',
         minAmount: 349,
-        saleAmount: 12,
         products: [
             {
                 id: 25,
@@ -232,7 +228,6 @@ const shopData = [
         title: 'Home Appliances',
         imageURL: 'https://femina.wwmindia.com/thumb/content/2020/sep/home-01-thumb1599488868.jpg?width=1200&height=900',
         minAmount: 129,
-        saleAmount: 14,
         products: [
             {
                 id: 33,
@@ -289,7 +284,6 @@ const shopData = [
         title: 'Kitchen Appliances',
         imageURL: 'https://www.crompton.co.in/wp-content/uploads/2021/08/1500x385_mixer-1200x900.png',
         minAmount: 79,
-        saleAmount: 16,
         products: [
             {
                 id: 41,
@@ -346,7 +340,6 @@ const shopData = [
         title: 'Camera',
         imageURL: 'https://images.news18.com/ibnlive/uploads/2023/04/untitled-design-2023-04-05t121021.231.jpg',
         minAmount: 399,
-        saleAmount: 8,
         products: [
             {
                 id: 49,
@@ -403,7 +396,6 @@ const shopData = [
         title: 'Accessories',
         imageURL: 'https://manofmany.com/wp-content/uploads/2022/03/Bose-QuietComfort-45-headphones-1200x900.png',
         minAmount: 39,
-        saleAmount: 10,
         products: [
             {
                 id: 57,

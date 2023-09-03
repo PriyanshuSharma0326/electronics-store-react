@@ -21,10 +21,6 @@ function CategoryItem({ title, imageURL, minAmount, saleAmount }) {
                 <h2 className='title'>{title}</h2>
 
                 <h2 className='amount'>Starts from <span>${minAmount}</span></h2>
-
-                <div className="sale">
-                    <h2>Sale {saleAmount}% off</h2>
-                </div>
             </div>
         </div>
     );
