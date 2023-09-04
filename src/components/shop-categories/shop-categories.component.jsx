@@ -8,7 +8,7 @@ function ShopCategories() {
 
     return (
         <div className='shop-categories-container'>
-            {shop.map(shopCategory => {
+            {shop.sort((a, b) => a.id - b.id).map(shopCategory => {
                 return (
                     <CategoryPreview 
                         key={shopCategory.id} 

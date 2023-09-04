@@ -9,8 +9,8 @@ import Button from '../components/button/button.component';
 import CategoryPreview from '../components/category-preview/category-preview.component';
 import ShopCategories from '../components/shop-categories/shop-categories.component';
 
-import categories from './categories';
-import productsList from './products-list';
+// import categories from './categories';
+// import productsList from './products-list';
 
 import Contact from '../routes/contact/contact.route';
 import Error from '../routes/error/error.route';
@@ -32,9 +32,6 @@ export {
     Button,
     CategoryPreview,
     ShopCategories,
-
-    categories,
-    productsList,
 
     Contact,
     Error,
