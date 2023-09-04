@@ -8,11 +8,8 @@ export const CartContext = createContext({
 const addItem = (cartItems, item) => {
     const itemSnapshot = cartItems.find((cartItem) => cartItem.id === item.id);
 
-    console.log(itemSnapshot);
-
     if(itemSnapshot) {
         return cartItems.map((cartItem) => {
-            console.log(cartItem);
             if(cartItem.id === item.id) {
                 return {...cartItem, quantity: cartItem.quantity + 1};
             }

@@ -26,22 +26,24 @@ function CartItem({ item }) {
 
     return (
         <div className='cart-product-container'>
-            <div className="product-image-container">
-                <img src={item.imageURL} alt={item.name} />
-            </div>
+            <div className="cart-product-info">
+                <div className="product-image-container">
+                    <img src={item.imageURL} alt={item.name} />
+                </div>
 
-            <div className="cart-product-details">
-                <h2 className='name'>{item.name}</h2>
+                <div className="cart-product-details">
+                    <h2 className='name'>{item.name}</h2>
 
-                <h2 className='price'>${item.price}</h2>
+                    <h2 className='price'>${item.price}</h2>
 
-                <h2 className='more-options'>
-                    <Button 
-                        buttonText='Delete' 
-                        buttonType='simple' 
-                        onClick={deleteItemFromCart} 
-                    />
-                </h2>
+                    <h2 className='more-options'>
+                        <Button 
+                            buttonText='Delete' 
+                            buttonType='simple' 
+                            onClick={deleteItemFromCart} 
+                        />
+                    </h2>
+                </div>
             </div>
 
             <div className="product-quantity-selection">

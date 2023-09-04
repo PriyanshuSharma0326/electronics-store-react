@@ -21,11 +21,11 @@ function Cart() {
                 <div className="cart-container-header">
                     <h1>Shopping Cart</h1>
 
-                    <Button 
+                    {cartCount !== 0 && <Button 
                         buttonText='Deselect all items' 
                         buttonType='simple' 
                         onClick={clearCart} 
-                    />
+                    />}
                 </div>
 
                 {cartItems.map((item) => {

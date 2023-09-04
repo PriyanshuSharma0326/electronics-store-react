@@ -6,19 +6,6 @@ import CategoryBasedProducts from '../category-based-products/category-based-pro
 
 function Shop() {
     return (
-        // <div className='products-container'>
-        //     {shop.map((shopCategory) => {
-        //         return (
-        //             <CategoryPreview 
-        //                 key={shopCategory.id} 
-        //                 title={shopCategory.title} 
-        //                 products={shopCategory.products} 
-        //                 sale={shopCategory.saleAmount} 
-        //             />
-        //         )
-        //     })}
-        // </div>
-
         <Routes>
             <Route 
                 index 

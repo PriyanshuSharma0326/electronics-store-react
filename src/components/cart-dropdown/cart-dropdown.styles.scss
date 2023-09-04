@@ -30,7 +30,19 @@ $grey: #6B728E;
         }
     }
 
+    @media (max-width: 1024px) {
+        right: 5rem;
+    }
+
     @media (max-width: 768px) {
-        right: 2rem;
+        right: 4rem;
+    }
+
+    @media (max-width: 426px) {
+        right: 1.5rem;
+    }
+
+    @media (max-width: 376px) {
+        width: 20.4rem;
     }
 }

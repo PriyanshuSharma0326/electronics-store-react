@@ -5,10 +5,8 @@ import ProductCard from '../product-card/product-card.component';
 function CategoryPreview({ title, products }) {
     return (
         <div className='category-preview-container'>
-            <div>
-                <h1>
-                    {title}
-                </h1>
+            <div className='category-title'>
+                <h1>{title}</h1>
             </div>
 
             <div className='category-preview-products'>

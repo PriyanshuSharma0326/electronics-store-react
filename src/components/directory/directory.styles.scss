@@ -1,10 +1,28 @@
 .categories-container {
     width: 85%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     row-gap: 2rem;
+    column-gap: 4rem;
     margin: 0 auto;
     margin-top: 7.5rem;
+
+    @media (max-width: 1440px) {
+        column-gap: 3rem;
+    }
+
+    @media (max-width: 1024px) {
+        grid-template-columns: repeat(3, 1fr);
+        padding-bottom: 2.5rem;
+    }
+
+    @media (max-width: 768px) {
+        width: 75%;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 426px) {
+        grid-template-columns: repeat(1, 1fr);
+        width: fit-content;
+    }
 }

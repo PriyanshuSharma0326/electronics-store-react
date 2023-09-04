@@ -14,6 +14,7 @@
         text-decoration: none;
         color: var(--white);
         display: flex;
+        align-items: center;
     }
 
     .nav-logo {
@@ -24,6 +25,10 @@
         margin-left: 1rem;
         font-size: 1.5rem;
         color: var(--white);
+
+        @media (max-width: 426px) {
+            display: none;
+        }
     }
 
     .nav-links-container {
@@ -60,7 +65,15 @@
         }
     }
 
+    @media (max-width: 1024px) {
+        padding: 1rem 5rem;
+    }
+
     @media (max-width: 768px) {
-        padding: 1rem 2rem;
+        padding: 1rem 4rem;
+    }
+
+    @media (max-width: 426px) {
+        padding: 1rem 1.5rem;
     }
 }
