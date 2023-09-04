@@ -1,5 +1,5 @@
 import React from 'react'
-import { signOutUser } from '../../lib/utils/firebase.util'
+import { signOutUser } from '../../lib/utils/firebase.utils'
 import { useNavigate } from 'react-router-dom';
 
 function Account() {

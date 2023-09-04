@@ -2,7 +2,7 @@ import React from 'react';
 import './category-preview.styles.scss';
 import ProductCard from '../product-card/product-card.component';
 
-function CategoryPreview({ title, products, sale }) {
+function CategoryPreview({ title, products }) {
     return (
         <div className='category-preview-container'>
             <div>
@@ -18,7 +18,6 @@ function CategoryPreview({ title, products, sale }) {
                         <ProductCard 
                             key={product.id} 
                             product={product} 
-                            discount={sale} 
                         />
                     );
                 })

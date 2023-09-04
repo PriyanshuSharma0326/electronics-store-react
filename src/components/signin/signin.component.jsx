@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './signin.styles.scss';
-import { createUserDoc, googlePopupSignIn, signInUserEmailPasswordMethod } from '../../lib/utils/firebase.util';
+import { createUserDoc, googlePopupSignIn, signInUserEmailPasswordMethod } from '../../lib/utils/firebase.utils';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 import { useNavigate } from 'react-router-dom';

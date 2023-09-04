@@ -1,12 +1,22 @@
-import { createContext, useState } from "react";
-import shopData from '../constants/shop_data';
+import { createContext, useEffect, useState } from "react";
+
+import { getShopDataFromCollections } from '../lib/utils/firebase.utils';
 
 export const CategoriesContext = createContext({
     shopData: [],
 });
 
 export const CategoriesContextProvider = ({ children }) => {
-    const [shop, setShop] = useState(shopData);
+    const [shop, setShop] = useState([]);
+
+    useEffect(() => {
+        const getShop = async () => {
+            const shopData = await getShopDataFromCollections();
+            setShop(shopData);
+        }
+
+        getShop();
+    }, []);
 
     const contextValue = {
         shop,

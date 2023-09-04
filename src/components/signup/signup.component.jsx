@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './signup.styles.scss';
-import { createUserDoc, createUserEmailPasswordMethod } from '../../lib/utils/firebase.util';
+import { createUserDoc, createUserEmailPasswordMethod } from '../../lib/utils/firebase.utils';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 import { useNavigate } from 'react-router-dom';
