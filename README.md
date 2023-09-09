@@ -1,6 +1,6 @@
 # CircuitCart - Your Electronics Store
 
-![CircuitCart Screenshot](/public/assets/screenshot.png)
+![CircuitCart Screenshot](/public/assets/desktop.png)
 
 Welcome to CircuitCart, your one-stop destination for all your electronics shopping needs. This ecommerce application is built with React and Firebase, offering a seamless shopping experience for a wide range of electronic products.
 
