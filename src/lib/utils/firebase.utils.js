@@ -1,12 +1,14 @@
-import { auth, db, provider } from "../config/firebase";
+import { auth, db, provider, storage } from "../config/firebase";
+
 import { 
+    arrayUnion,
+    collection,
     doc,
     getDoc,
-    setDoc,
-    collection,
-    writeBatch,
-    query,
     getDocs,
+    query,
+    setDoc,
+    updateDoc,
 } from 'firebase/firestore';
 
 import { 
@@ -15,10 +17,22 @@ import {
     signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged,
+    updateProfile,
 } from 'firebase/auth';
 
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+
+import { v4 as uuidv4 } from 'uuid';
+
 // Method to Create User Doc to collections
-const createUserDoc = async (user) => {
+const createUserDoc = async (user, formData, imageURL) => {
+    const {
+        firstName,
+        lastName,
+        address,
+        phoneNumber,
+    } = formData;
+
     if(!user) return;
 
     const userDocRef = doc(db, 'users', user.uid);
@@ -26,14 +40,16 @@ const createUserDoc = async (user) => {
     const userSnapshot = await getDoc(userDocRef);
 
     if(!userSnapshot.exists()) {
-        const { displayName, email } = user;
-        const createdAt = new Date();
+        const { email, uid } = user;
 
         try {
             await setDoc(userDocRef, {
-                displayName,
+                uid,
+                displayName: firstName + ' ' + lastName,
                 email,
-                createdAt
+                photoURL: imageURL,
+                address,
+                phoneNumber,
             });
         }
         catch(err) {
@@ -56,6 +72,34 @@ const createUserEmailPasswordMethod = async (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
 }
 
+const addImageToStorage = async (file, formData, user) => {
+    const {
+        firstName,
+        lastName,
+        phoneNumber,
+    } = formData;
+    const { uid } = user;
+
+    const storageRef = ref(storage, uid);
+
+    await uploadBytesResumable(storageRef, file)
+    .then(() => {
+        getDownloadURL(storageRef).then(async (downloadURL) => {
+            try {
+                await updateProfile(user, {
+                    displayName: firstName + ' ' + lastName,
+                    photoURL: downloadURL,
+                    phoneNumber: phoneNumber,
+                });
+                await createUserDoc(user, formData, downloadURL);
+            }
+            catch (err) {
+                console.log(err);
+            }
+        });
+    });
+}
+
 // Method to Sign User In with Email and Password
 const signInUserEmailPasswordMethod = async (email, password) => {
     if(!email || !password) {
@@ -73,21 +117,6 @@ const authStateChangeListener = (callback) => {
     onAuthStateChanged(auth, callback);
 }
 
-// Method to Add Shop Data to collections
-const addCollectionAndDocuments = async (collectionKey, objectsToAdd, field = 'title') => {
-    const collectionRef = collection(db, collectionKey);
-
-    const batch = writeBatch(db);
-
-    objectsToAdd.forEach(object => {
-        const docRef = doc(collectionRef, object[field]);
-
-        batch.set(docRef, object);
-    });
-
-    await batch.commit();
-}
-
 // Method to Get Shop Data from collections
 const getShopDataFromCollections = async () => {
     const collectionRef = collection(db, 'categories');
@@ -103,6 +132,19 @@ const getShopDataFromCollections = async () => {
     return shopData;
 }
 
+const addProductToCollection = async () => {
+    const categoriesDocRef = doc(db, 'categories', 'Accessories');
+
+    await updateDoc(categoriesDocRef, {
+        products: arrayUnion({
+            id: uuidv4(),
+            imageURL: '',
+            name: 'Sample',
+            price: '240'
+        })
+    })
+}
+
 export {
     googlePopupSignIn,
     createUserDoc,
@@ -111,6 +153,7 @@ export {
     signOutUser,
     authStateChangeListener,
 
-    addCollectionAndDocuments,
     getShopDataFromCollections,
+    addProductToCollection,
+    addImageToStorage
 };

@@ -11,7 +11,21 @@ export const UserContextProvider = ({ children }) => {
 
     useEffect(()=> {
         const unsubscribe = authStateChangeListener((user) => {
-            setCurrentUser(user);
+            if(user?.reloadUserInfo.providerUserInfo[0].providerId === 'password') {
+                if(user?.photoURL) {
+                    setCurrentUser(user);
+                }
+                else {
+                    // setLoading(true);
+                    setTimeout(() => {
+                        setCurrentUser(user);
+                        // setLoading(false);
+                    }, 5000);
+                }
+            }
+            else {
+                setCurrentUser(user);
+            }
         })
 
         return unsubscribe;

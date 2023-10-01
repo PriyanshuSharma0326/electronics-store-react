@@ -25,4 +25,4 @@ function CategoryBasedProducts() {
     )
 }
 
-export default CategoryBasedProducts
+export default CategoryBasedProducts;

@@ -9,7 +9,15 @@ $main-color: black;
 
 .form-group {
     position: relative;
-    margin: 30px 0;
+    // margin: 30px 0; //Should be available when form is not grid or flex
+
+    .error-text {
+        position: absolute;
+        left: 5px;
+        bottom: -1.5rem;
+        font-size: 0.85rem;
+        color: var(--red);
+    }
 
     .form-input {
         background: none;
@@ -22,7 +30,7 @@ $main-color: black;
         border: none;
         border-radius: 0;
         border-bottom: 1px solid $sub-color;
-        margin: 25px 0;
+        // margin: 25px 0; //Should be available when form is not grid or flex
 
         &:focus {
             outline: none;

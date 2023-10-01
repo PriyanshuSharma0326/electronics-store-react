@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './signup.styles.scss';
-import { createUserDoc, createUserEmailPasswordMethod } from '../../lib/utils/firebase.utils';
+import { addImageToStorage, createUserEmailPasswordMethod } from '../../lib/utils/firebase.utils';
+import { validateAddress, validateEmail, validatePassword, validatePhoneNumber } from '../../lib/utils/utils';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 import { useNavigate } from 'react-router-dom';
+import AddPhotoAlternateTwoToneIcon from '@mui/icons-material/AddPhotoAlternateTwoTone';
 
 function SignUp() {
     const navigate = useNavigate();
@@ -13,13 +15,29 @@ function SignUp() {
     };
 
     const defaultFormFields = {
-        displayName: '',
+        firstName: '',
+        lastName: '',
         email: '',
+        address: '',
+        phoneNumber: '',
         password: '',
         confirmPassword: ''
     };
 
+    const defaultFormErrors = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        address: '',
+        phoneNumber: '',
+        password: '',
+        confirmPassword: '',
+        image: ''
+    };
+
     const [formInputs, setFormInputs] = useState(defaultFormFields);
+
+    const [formErrors, setFormErrors] = useState(defaultFormErrors);
 
     const changeHandler = (e) => {
         const { name, value } = e.target;
@@ -29,35 +47,72 @@ function SignUp() {
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        if(formInputs.displayName && formInputs.email && formInputs.password && formInputs.confirmPassword) {
-            if(formInputs.password === formInputs.confirmPassword) {
-                try {
-                    const { user } = await createUserEmailPasswordMethod(formInputs.email, formInputs.password);
+        const image = e.target[7].files[0];
 
-                    await createUserDoc({...user, displayName: formInputs.displayName});
-                }
-                catch(err) {
-                    if(err.code === 'auth/invalid-email') {
-                        alert('Invalid email format!');
-                        return;
-                    }
-                    else if(err.code === 'auth/email-already-in-use') {
-                        alert('Email already exists!');
-                        return;
-                    }
-                    else {
-                        console.log('Error while creating user', err.message);
-                    }
-                }
-            }
-            else {
-                alert('Passwords do not match!');
-                return;
-            }
+        const validationErrors = {};
+
+        if(!formInputs.firstName.trim()) {
+            validationErrors.firstName = 'First name is required';
         }
-        else {
-            alert('All form fields are mandatory!');
+
+        if(!formInputs.lastName.trim()) {
+            validationErrors.lastName = 'Last name is required';
+        }
+
+        if(!formInputs.email.trim()) {
+            validationErrors.email = 'Email is required';
+        }
+        else if(!validateEmail(formInputs.email.trim())) {
+            validationErrors.email = 'Email is badly formatted';
+        }
+
+        if(!formInputs.phoneNumber.trim()) {
+            validationErrors.phoneNumber = 'Phone number is required';
+        }
+        else if(!validatePhoneNumber(formInputs.phoneNumber.trim())) {
+            validationErrors.phoneNumber = 'Invalid Phone number';
+        }
+
+        if(!formInputs.password.trim()) {
+            validationErrors.password = 'Password is required';
+        }
+        else if(!validatePassword(formInputs.password.trim())) {
+            validationErrors.password = 'Must be at least 6 or more characters';
+        }
+
+        if(!formInputs.confirmPassword.trim()) {
+            validationErrors.confirmPassword = 'Password is required';
+        }
+        else if(formInputs.confirmPassword.trim() !== formInputs.password.trim()) {
+            validationErrors.confirmPassword = 'Password doesn\'t match';
+        }
+
+        if(!formInputs.address.trim()) {
+            validationErrors.address = 'Address is required';
+        }
+        else if(!validateAddress(formInputs.address.trim())) {
+            validationErrors.address = 'Special characters not allowed';
+        }
+
+        if(Object.keys(validationErrors).length > 0) {
+            setFormErrors(validationErrors);
             return;
+        }
+
+        if(Object.keys(validationErrors).length === 0) {
+            setFormErrors(defaultFormErrors);
+
+            try {
+                const { user } = await createUserEmailPasswordMethod(formInputs.email, formInputs.password);
+                await addImageToStorage(image, formInputs, user);
+            }
+            catch(err) {
+                if(err.code === 'auth/email-already-in-use') {
+                    validationErrors.email = 'Email already in use!';
+                    setFormErrors(validationErrors);
+                    return;
+                }
+            }
         }
     }
 
@@ -66,24 +121,36 @@ function SignUp() {
             <div className='sign-up-form-container'>
                 <h2>Sign Up</h2>
 
-                <form onSubmit={submitHandler}>
+                <form id='registeration-form' onSubmit={submitHandler}>
                     <FormInput 
-                        labelText='Display Name' 
+                        labelText='First Name' 
+                        errorText={formErrors.firstName} 
                         inputOptions={{
                             type: 'text',
-                            required: true,
-                            id: 'displayName',
-                            name: 'displayName',
+                            id: 'firstName',
+                            name: 'firstName',
                             onChange: changeHandler,
-                            value: formInputs.displayName
+                            value: formInputs.firstName
+                        }}
+                    />
+
+                    <FormInput 
+                        labelText='Last Name' 
+                        errorText={formErrors.lastName} 
+                        inputOptions={{
+                            type: 'text',
+                            id: 'lastName',
+                            name: 'lastName',
+                            onChange: changeHandler,
+                            value: formInputs.lastName
                         }}
                     />
 
                     <FormInput 
                         labelText='Email' 
+                        errorText={formErrors.email} 
                         inputOptions={{
                             type: 'email',
-                            required: true,
                             id: 'email',
                             name: 'email',
                             onChange: changeHandler,
@@ -92,10 +159,22 @@ function SignUp() {
                     />
 
                     <FormInput 
+                        labelText='Phone Number' 
+                        errorText={formErrors.phoneNumber} 
+                        inputOptions={{
+                            type: 'number',
+                            id: 'phoneNumber',
+                            name: 'phoneNumber',
+                            onChange: changeHandler,
+                            value: formInputs.phoneNumber
+                        }}
+                    />
+
+                    <FormInput 
                         labelText='Password' 
+                        errorText={formErrors.password} 
                         inputOptions={{
                             type: 'password',
-                            required: true,
                             id: 'password',
                             name: 'password',
                             onChange: changeHandler,
@@ -105,9 +184,9 @@ function SignUp() {
 
                     <FormInput 
                         labelText='Confirm Password' 
+                        errorText={formErrors.confirmPassword} 
                         inputOptions={{
                             type: 'password',
-                            required: true,
                             id: 'confirmPassword',
                             name: 'confirmPassword',
                             onChange: changeHandler,
@@ -115,11 +194,38 @@ function SignUp() {
                         }}
                     />
 
-                    <Button 
-                        buttonText='Sign Up' 
-                        type='submit'
+                    <FormInput 
+                        labelText='Address' 
+                        errorText={formErrors.address} 
+                        inputOptions={{
+                            type: 'text',
+                            id: 'address',
+                            name: 'address',
+                            onChange: changeHandler,
+                            value: formInputs.address
+                        }}
                     />
+
+                    <div className="image-input-group">
+                        <label htmlFor='image'>
+                            <AddPhotoAlternateTwoToneIcon />
+                            <span>Add an image</span>
+                        </label>
+                        <input 
+                            className='image-input' 
+                            type='file' 
+                            id='image' 
+                            name='image'
+                        />
+                        <span>*Max size: 1MB</span>
+                    </div>
                 </form>
+
+                <Button 
+                    form='registeration-form'
+                    buttonText='Sign Up' 
+                    type='submit' 
+                />
             </div>
 
             <div className="go-to-login">

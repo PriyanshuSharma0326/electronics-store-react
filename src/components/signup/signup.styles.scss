@@ -4,7 +4,8 @@ $grey: #6B728E;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 22rem;
+    width: 48rem;
+    margin-top: 6rem;
 
     .sign-up-form-container {
         display: flex;
@@ -15,12 +16,55 @@ $grey: #6B728E;
         h2 {
             font-size: 1.5rem;
             text-align: center;
+            margin-bottom: 2rem;
         }
 
         form {
-            button {
-                width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 1.5rem;
+            row-gap: 3.5rem;
+            align-items: center;
+
+            .image-input-group{
+                display: flex;
+                align-items: center;
+        
+                label {
+                    padding: 10px;
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+        
+                    .MuiSvgIcon-root {
+                        color: var(--green-1);
+                    }
+        
+                    > span {
+                        margin-left: 1rem;
+                        font-size: 1rem;
+                        font-weight: 500;
+                        color: #6B728E;
+                    }
+                }
+        
+                .image-input {
+                    display: none;
+                }
+        
+                > span {
+                    margin-left: 1rem;
+                    font-size: 0.85rem;
+                    color: var(--red);
+                }
             }
+        }
+
+        button {
+            margin: 0 auto;
+            margin-top: 2.5rem;
+            height: fit-content;
+            width: 50%;
         }
     }
 

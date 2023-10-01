@@ -4,6 +4,7 @@ import { createUserDoc, googlePopupSignIn, signInUserEmailPasswordMethod } from 
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 import { useNavigate } from 'react-router-dom';
+import { validateEmail } from '../../lib/utils/utils';
 
 function SignIn() {
     const navigate = useNavigate();
@@ -17,7 +18,14 @@ function SignIn() {
         password: ''
     };
 
+    const defaultFormErrors = {
+        email: '',
+        password: '',
+    };
+
     const [formInputs, setFormInputs] = useState(defaultFormFields);
+
+    const [formErrors, setFormErrors] = useState(defaultFormErrors);
 
     const changeHandler = (e) => {
         const { name, value } = e.target;
@@ -27,25 +35,46 @@ function SignIn() {
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        if(formInputs.email && formInputs.password) {
+        const validationErrors = {};
+
+        if(!formInputs.email.trim()) {
+            validationErrors.email = 'Email is required';
+        }
+        else if(!validateEmail(formInputs.email.trim())) {
+            validationErrors.email = 'Email is badly formatted';
+        }
+
+        if(!formInputs.password.trim()) {
+            validationErrors.password = 'Password is required';
+        }
+
+        if(Object.keys(validationErrors).length > 0) {
+            setFormErrors(validationErrors);
+            return;
+        }
+
+        if(Object.keys(validationErrors).length === 0) {
             try {
                 await signInUserEmailPasswordMethod(formInputs.email, formInputs.password);
-
-                setFormInputs(defaultFormFields);
             }
             catch(err) {
                 if(err.code === 'auth/user-not-found') {
-                    alert('No user found with this email!');
+                    validationErrors.email = 'No user found with this email';
+                    setFormErrors(validationErrors);
+                    return;
+                }
+                if(err.code === 'auth/invalid-login-credentials') {
+                    validationErrors.email = 'Invalid Login Credentials';
+                    validationErrors.password = 'Invalid Login Credentials';
+                    setFormErrors(validationErrors);
+                    return;
                 }
                 else if(err.code === 'auth/wrong-password') {
-                    alert('Incorrect password!');
+                    validationErrors.password = 'Incorrect password';
+                    setFormErrors(validationErrors);
+                    return;
                 }
-                console.log('Error while signing in', err.code);
             }
-        }
-        else {
-            alert('All form fields are mandatory!');
-            return;
         }
     }
 
@@ -66,6 +95,7 @@ function SignIn() {
                 <form onSubmit={submitHandler}>
                     <FormInput 
                         labelText='Email' 
+                        errorText={formErrors.email} 
                         inputOptions={{
                             type: 'email',
                             required: true,
@@ -78,6 +108,7 @@ function SignIn() {
 
                     <FormInput 
                         labelText='Password' 
+                        errorText={formErrors.password} 
                         inputOptions={{
                             type: 'password',
                             required: true,
