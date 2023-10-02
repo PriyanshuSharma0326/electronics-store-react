@@ -1,0 +1,96 @@
+$grey: #6B728E;
+
+.dashboard-container {
+    width: 85%;
+    margin: 0 auto;
+    margin-top: 7.5rem;
+
+    .page-title {
+        font-size: 2.25rem;
+    }
+
+    .dashboard-main {
+        display: flex;
+        gap: 2rem;
+        margin-top: 1.5rem;
+
+        .dashboard-data {
+            width: 80%;
+            border: 1px solid $grey;
+            padding: 1rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            height: fit-content;
+
+            > h1 {
+                font-size: 1.75rem;
+                padding: 0 2rem;
+            }
+
+            .users {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .products {
+                padding: 0 2rem;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                column-gap: 2rem;
+                row-gap: 2rem;
+            }
+        }
+
+        .stats {
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            border: 1px solid $grey;
+            height: fit-content;
+            padding: 1rem 0;
+
+            .stats-section-title {
+                text-align: center;
+                font-size: 1.25rem;
+            }
+
+            .stat-box {
+                padding: 0.25rem 1rem;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+
+                .icon {
+                    line-height: 0;
+                    padding: 0.5rem;
+
+                    .MuiSvgIcon-root {
+                        font-size: 1.5rem;
+                    }
+                }
+
+                .stat-count {
+                    display: flex;
+                    width: 100%;
+                    margin-right: 1rem;
+
+                    p {
+                        font-size: 1.15rem;
+                    }
+
+                    span {
+                        font-size: 1.15rem;
+                        margin-left: auto;
+                    }
+                }
+
+                &:hover, &.active {
+                    cursor: pointer;
+                    background-color: var(--grey-7);
+                }
+            }
+        }
+    }
+}

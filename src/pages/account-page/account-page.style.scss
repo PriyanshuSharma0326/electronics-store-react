@@ -1,0 +1,94 @@
+.account-page-container {
+    margin: 0 auto;
+    margin-top: 7.5rem;
+    width: 85%;
+
+    .account-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+        
+        .account {
+            margin: 0 auto;
+            width: 65%;
+            background-color: var(--grey-6);
+            padding: 1rem 3rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+
+            .profile-image-container {
+                width: 9rem;
+                height: 9rem;
+                border-radius: 50%;
+                overflow: hidden;
+                line-height: 0;
+                border: 3px solid black;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .account-details {
+            margin: 0 auto;
+            width: 65%;
+            background-color: var(--grey-7);
+            padding: 1rem 3rem;
+            border-radius: 1rem;
+
+            .detail-container {
+                // margin-top: 1.5rem;
+
+                h1 {
+                    font-size: 1.25rem;
+                    font-weight: 500;
+                }
+
+                ul {
+                    margin-top: 1rem;
+                    list-style: none;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.45rem;
+
+                    li {
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+
+                        h2 {
+                            width: 4rem;
+                            font-size: 1rem;
+                        }
+
+                        p {
+                            font-size: 0.9rem;
+                        }
+                    }
+                }
+            }
+        }
+
+        .buttons-container {
+            margin: 0 auto;
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+
+            button {
+                margin: 0 auto;
+                width: 50%;
+            }
+        }
+    }
+}

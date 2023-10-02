@@ -24,6 +24,21 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 import { v4 as uuidv4 } from 'uuid';
 
+// Method to Users Info from collection
+const getUsers = async () => {
+    const collectionRef = collection(db, 'users');
+
+    const q = query(collectionRef);
+
+    const querySnapshot = await getDocs(q);
+
+    const users = querySnapshot.docs.map(docSnapshot => {
+        return docSnapshot.data();
+    });
+
+    return users;
+}
+
 // Method to Create User Doc to collections
 const createUserDoc = async (user, formData, imageURL) => {
     const {
@@ -50,6 +65,7 @@ const createUserDoc = async (user, formData, imageURL) => {
                 photoURL: imageURL,
                 address,
                 phoneNumber,
+                admin: false,
             });
         }
         catch(err) {
@@ -132,6 +148,7 @@ const getShopDataFromCollections = async () => {
     return shopData;
 }
 
+// Add Product to Collection
 const addProductToCollection = async () => {
     const categoriesDocRef = doc(db, 'categories', 'Accessories');
 
@@ -146,6 +163,7 @@ const addProductToCollection = async () => {
 }
 
 export {
+    getUsers,
     googlePopupSignIn,
     createUserDoc,
     createUserEmailPasswordMethod,

@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { authStateChangeListener } from '../lib/utils/firebase.utils';
+import { authStateChangeListener, getUsers } from '../lib/utils/firebase.utils';
 
 export const UserContext = createContext({
     currentUser: null,
@@ -8,6 +8,7 @@ export const UserContext = createContext({
 
 export const UserContextProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
+    const [userList, setUserList] = useState([]);
 
     useEffect(()=> {
         const unsubscribe = authStateChangeListener((user) => {
@@ -31,8 +32,25 @@ export const UserContextProvider = ({ children }) => {
         return unsubscribe;
     }, []);
 
+    useEffect(() => {
+        try {
+            const getUserList = async () => {
+                const users = await getUsers();
+                setUserList(users);
+            }
+
+            getUserList();
+        }
+        catch(err) {
+            console.log(err);
+        }
+    }, []);
+
     const contextValue = {
-        currentUser, setCurrentUser
+        currentUser,
+        setCurrentUser,
+        userList,
+        setUserList,
     };
 
     return (

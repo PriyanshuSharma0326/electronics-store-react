@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { Directory } from '../../constants/index';
-import { CategoriesContext } from '../../context/categories-context';
+import { ShopContext } from '../../context/shop-context';
 
 function Root() {
-    const { shop } = useContext(CategoriesContext);
+    const { shop } = useContext(ShopContext);
 
     return (
         <Directory 

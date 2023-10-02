@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import './shop-categories.styles.scss';
 import { CategoryPreview } from '../../constants';
-import { CategoriesContext } from '../../context/categories-context';
+import { ShopContext } from '../../context/shop-context';
 
 function ShopCategories() {
-    const { shop } = useContext(CategoriesContext);
+    const { shop } = useContext(ShopContext);
 
     return (
         <div className='shop-categories-container'>

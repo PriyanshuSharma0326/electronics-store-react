@@ -1,16 +1,15 @@
 import CategoryItem from '../components/category-item/category-item.component';
 import Directory from '../components/directory/directory.component';
 import Navbar from '../components/navbar/navbar.component';
-import SignIn from '../components/signin/signin.component';
-import SignUp from '../components/signup/signup.component';
 import ProductCard from '../components/product-card/product-card.component';
 import CartItem from '../components/cart-item/cart-item.component';
 import Button from '../components/button/button.component';
 import CategoryPreview from '../components/category-preview/category-preview.component';
 import ShopCategories from '../components/shop-categories/shop-categories.component';
+import FormInput from '../components/form-input/form-input.component';
 
-// import categories from './categories';
-// import productsList from './products-list';
+import SignIn from '../pages/signin/signin';
+import SignUp from '../pages/signup/signup';
 
 import Contact from '../routes/contact/contact.route';
 import Error from '../routes/error/error.route';
@@ -22,6 +21,7 @@ import Shop from '../routes/shop/shop.route';
 import Cart from '../routes/cart/cart.route';
 
 export {
+    FormInput,
     CategoryItem,
     Directory,
     Navbar,

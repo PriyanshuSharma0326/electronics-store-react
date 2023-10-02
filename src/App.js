@@ -12,7 +12,9 @@ import {
     SignUp,
     Cart
 } from './constants/index';
+
 import { UserContext } from "./context/user-context";
+import DashboardRoute from './routes/dashboard/dashboard.route';
 
 function App() {
     const { currentUser } = useContext(UserContext);
@@ -59,6 +61,8 @@ function App() {
                         <Account />
                     </ProtectedRouteNoLogin>
                 } />
+
+                <Route path='dashboard' element={<DashboardRoute />} />
 
                 <Route path='cart' element={<Cart />} />
 

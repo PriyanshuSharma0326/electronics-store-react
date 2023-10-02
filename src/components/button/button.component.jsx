@@ -4,7 +4,7 @@ import './button.styles.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const BUTTON_TYPE_CLASS = {
-    google: 'google-sign-in',
+    blue: 'blue',
     inverted: 'inverted',
     simple: 'simple',
     icon: 'icon'

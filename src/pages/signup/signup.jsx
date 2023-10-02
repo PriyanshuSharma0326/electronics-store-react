@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import './signup.styles.scss';
 import { addImageToStorage, createUserEmailPasswordMethod } from '../../lib/utils/firebase.utils';
 import { validateAddress, validateEmail, validatePassword, validatePhoneNumber } from '../../lib/utils/utils';
-import FormInput from '../form-input/form-input.component';
-import Button from '../button/button.component';
+import { FormInput, Button } from '../../constants/index';
 import { useNavigate } from 'react-router-dom';
 import AddPhotoAlternateTwoToneIcon from '@mui/icons-material/AddPhotoAlternateTwoTone';
 

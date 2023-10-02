@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './signin.styles.scss';
 import { createUserDoc, googlePopupSignIn, signInUserEmailPasswordMethod } from '../../lib/utils/firebase.utils';
-import FormInput from '../form-input/form-input.component';
-import Button from '../button/button.component';
+import { FormInput, Button } from '../../constants/index';
 import { useNavigate } from 'react-router-dom';
 import { validateEmail } from '../../lib/utils/utils';
 
@@ -134,7 +133,7 @@ function SignIn() {
 
                         <Button 
                             type='button' 
-                            buttonType='google' 
+                            buttonType='blue' 
                             buttonText='Sign In With Google' 
                             onClick={googleSignInHandler} 
                         />
