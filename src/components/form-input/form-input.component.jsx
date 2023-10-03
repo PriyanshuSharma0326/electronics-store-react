@@ -12,7 +12,7 @@ function FormInput({ labelText, inputOptions, errorText }) {
             {labelText && 
             <label 
                 htmlFor={inputOptions.id} 
-                className={`form-input-label ${inputOptions.value.length ? 'shrink' : ''}`}>
+                className={`form-input-label ${inputOptions?.value?.length ? 'shrink' : ''}`}>
             {labelText}
             </label>}
 

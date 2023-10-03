@@ -62,7 +62,7 @@ function App() {
                     </ProtectedRouteNoLogin>
                 } />
 
-                <Route path='dashboard' element={<DashboardRoute />} />
+                <Route path='dashboard/*' element={<DashboardRoute />} />
 
                 <Route path='cart' element={<Cart />} />
 

@@ -9,7 +9,9 @@ import { CartContext } from '../../context/cart-context';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
 function Navbar() {
-    const { currentUser } = useContext(UserContext);
+    const { currentUser, userList } = useContext(UserContext);
+
+    const currentUserInfo = userList?.find(user => user?.uid === currentUser?.uid)
 
     const { isCartOpen, setIsCartOpen, cartCount } = useContext(CartContext);
 
@@ -64,6 +66,15 @@ function Navbar() {
                         </Link>
                     </li>
                 )}
+
+                {currentUserInfo?.admin && <li>
+                    <Link 
+                        to='/dashboard' 
+                        className='nav-link' 
+                    >
+                    Dashboard
+                    </Link>
+                </li>}
 
                 <li>
                     <div className="cart-icon-container" onClick={cartButtonHandler}>

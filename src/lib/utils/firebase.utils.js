@@ -149,17 +149,75 @@ const getShopDataFromCollections = async () => {
 }
 
 // Add Product to Collection
-const addProductToCollection = async () => {
-    const categoriesDocRef = doc(db, 'categories', 'Accessories');
+const addProductToCollection = async (productDoc) => {
+    const { productName, productPrice, category, image } = productDoc;
 
-    await updateDoc(categoriesDocRef, {
-        products: arrayUnion({
-            id: uuidv4(),
-            imageURL: '',
-            name: 'Sample',
-            price: '240'
-        })
-    })
+    const categoriesDocRef = doc(db, 'categories', category);
+
+    const storageRef = ref(storage, productName);
+
+    await uploadBytesResumable(storageRef, image)
+    .then(() => {
+        getDownloadURL(storageRef).then(async (downloadURL) => {
+            try {
+                await updateDoc(categoriesDocRef, {
+                    products: arrayUnion({
+                        id: uuidv4(),
+                        imageURL: downloadURL,
+                        name: productName,
+                        price: productPrice
+                    })
+                })
+            }
+            catch (err) {
+                console.log(err);
+            }
+        });
+    });
+}
+
+const updateProductInCollection = async (productDoc) => {
+    const { id, productName, productPrice, category, image } = productDoc;
+
+    const categoriesDocRef = doc(db, 'categories', category);
+
+    const storageRef = ref(storage, productName);
+
+    // Update logic
+    if(image) {
+        await uploadBytesResumable(storageRef, image)
+        .then(() => {
+            getDownloadURL(storageRef).then(async (downloadURL) => {
+                try {
+                    await updateDoc(categoriesDocRef, {
+                        products: arrayUnion({
+                            // id: id,
+                            imageURL: downloadURL,
+                            name: productName,
+                            price: productPrice
+                        })
+                    })
+                }
+                catch (err) {
+                    console.log(err);
+                }
+            });
+        });
+    }
+    else {
+        try {
+            await updateDoc(categoriesDocRef, {
+                products: arrayUnion({
+                    // id: id,
+                    name: productName,
+                    price: productPrice
+                })
+            })
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
 }
 
 export {
@@ -173,5 +231,6 @@ export {
 
     getShopDataFromCollections,
     addProductToCollection,
-    addImageToStorage
+    addImageToStorage,
+    updateProductInCollection
 };

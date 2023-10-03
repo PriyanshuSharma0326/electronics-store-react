@@ -23,9 +23,18 @@ $grey: #6B728E;
             gap: 1rem;
             height: fit-content;
 
-            > h1 {
-                font-size: 1.75rem;
+            .dashboard-title {
+                display: flex;
+                justify-content: space-between;
                 padding: 0 2rem;
+
+                > h1 {
+                    font-size: 1.75rem;
+                }
+
+                > button {
+                    width: 10rem;
+                }
             }
 
             .users {

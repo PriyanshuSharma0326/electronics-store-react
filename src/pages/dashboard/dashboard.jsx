@@ -8,13 +8,21 @@ import { UserContext } from '../../context/user-context';
 import { ShopContext } from '../../context/shop-context';
 import UserInfoBar from '../../components/user-info-bar/user-info-bar.component';
 import ProductBar from '../../components/product-bar/product-bar.component';
+import Button from '../../components/button/button.component';
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
+    const navigate = useNavigate();
+
     const [selectedStat, setSelectedStat] = useState('Users');
 
     const { userList } = useContext(UserContext);
 
     const { products } = useContext(ShopContext);
+
+    const goToAddProduct = () => {
+        navigate('/dashboard/add-product');
+    }
 
     return (
         <div className='dashboard-container'>
@@ -22,7 +30,15 @@ function Dashboard() {
 
             <div className="dashboard-main">
                 <div className="dashboard-data">
-                    <h1>{selectedStat}</h1>
+                    <div className="dashboard-title">
+                        <h1>{selectedStat}</h1>
+
+                        {selectedStat === 'Products' && <Button 
+                            type='button' 
+                            buttonText='Add Product' 
+                            onClick={goToAddProduct} 
+                        />}
+                    </div>
 
                     {selectedStat === 'Users' && <div className="users">
                         {userList.map(user => {
@@ -39,7 +55,7 @@ function Dashboard() {
                         {products.map(product => {
                             return (
                                 <ProductBar 
-                                    key={product.uid} 
+                                    key={product.id} 
                                     product={product} 
                                 />
                             )

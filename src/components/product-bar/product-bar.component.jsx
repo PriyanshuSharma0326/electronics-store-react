@@ -2,8 +2,15 @@ import React from 'react';
 import './product-bar.style.scss';
 import Button from '../button/button.component';
 import { faBucket, faPencil } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 function ProductBar({ product }) {
+    const navigate = useNavigate();
+
+    const goToUpdateProduct = () => {
+        navigate(`update-product/${product.id}`);
+    }
+
     return (
         <div className='product-bar'>
             <div className="product-info">
@@ -20,6 +27,7 @@ function ProductBar({ product }) {
             <div className="buttons-container">
                 <Button 
                     buttonType='icon' 
+                    onClick={goToUpdateProduct}
                     icon={faPencil} 
                 />
 
