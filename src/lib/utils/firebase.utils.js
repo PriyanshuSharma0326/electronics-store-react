@@ -1,6 +1,7 @@
 import { auth, db, provider, storage } from "../config/firebase";
 
 import { 
+    arrayRemove,
     arrayUnion,
     collection,
     doc,
@@ -176,22 +177,40 @@ const addProductToCollection = async (productDoc) => {
     });
 }
 
-const updateProductInCollection = async (productDoc) => {
-    const { id, productName, productPrice, category, image } = productDoc;
+const updateProductInCollection = async (defaultProductInfo, productDoc, imageFile, id) => {
+    const {
+        productName,
+        productPrice,
+        productImageURL,
+        category
+    } = productDoc;
+
+    const {
+        defaultProductName,
+        defaultProductPrice,
+        defaultProductImageURL,
+    } = defaultProductInfo;
 
     const categoriesDocRef = doc(db, 'categories', category);
 
     const storageRef = ref(storage, productName);
 
-    // Update logic
-    if(image) {
-        await uploadBytesResumable(storageRef, image)
+    if(imageFile) {
+        await uploadBytesResumable(storageRef, imageFile)
         .then(() => {
             getDownloadURL(storageRef).then(async (downloadURL) => {
                 try {
                     await updateDoc(categoriesDocRef, {
+                        products: arrayRemove({
+                            id: id,
+                            imageURL: defaultProductImageURL,
+                            name: defaultProductName,
+                            price: defaultProductPrice
+                        })
+                    })
+                    await updateDoc(categoriesDocRef, {
                         products: arrayUnion({
-                            // id: id,
+                            id: uuidv4(),
                             imageURL: downloadURL,
                             name: productName,
                             price: productPrice
@@ -207,8 +226,17 @@ const updateProductInCollection = async (productDoc) => {
     else {
         try {
             await updateDoc(categoriesDocRef, {
+                products: arrayRemove({
+                    id: id,
+                    imageURL: defaultProductImageURL,
+                    name: defaultProductName,
+                    price: defaultProductPrice
+                })
+            })
+            await updateDoc(categoriesDocRef, {
                 products: arrayUnion({
-                    // id: id,
+                    id: uuidv4(),
+                    imageURL: defaultProductImageURL,
                     name: productName,
                     price: productPrice
                 })
@@ -220,6 +248,32 @@ const updateProductInCollection = async (productDoc) => {
     }
 }
 
+const deleteProductFromCollection = async (productDoc) => {
+    const {
+        productID,
+        productName,
+        productPrice,
+        productImageURL,
+        category
+    } = productDoc;
+
+    const categoriesDocRef = doc(db, 'categories', category);
+
+    try {
+        await updateDoc(categoriesDocRef, {
+            products: arrayRemove({
+                id: productID,
+                imageURL: productImageURL,
+                name: productName,
+                price: productPrice
+            })
+        })
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
+
 export {
     getUsers,
     googlePopupSignIn,
@@ -228,9 +282,9 @@ export {
     signInUserEmailPasswordMethod,
     signOutUser,
     authStateChangeListener,
-
     getShopDataFromCollections,
     addProductToCollection,
     addImageToStorage,
-    updateProductInCollection
-};
+    updateProductInCollection,
+    deleteProductFromCollection,
+}

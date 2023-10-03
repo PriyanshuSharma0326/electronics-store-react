@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import './dashboard.style.scss';
-
 import InventoryIcon from '@mui/icons-material/Inventory';
 import SellIcon from '@mui/icons-material/Sell';
 import PeopleIcon from '@mui/icons-material/People';
@@ -10,6 +9,8 @@ import UserInfoBar from '../../components/user-info-bar/user-info-bar.component'
 import ProductBar from '../../components/product-bar/product-bar.component';
 import Button from '../../components/button/button.component';
 import { useNavigate } from 'react-router-dom';
+import { ConfirmBoxContext } from '../../context/confirm-box-context';
+import ConfirmationBox from '../../components/confirmation-box/confirmation-box.component';
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -19,6 +20,8 @@ function Dashboard() {
     const { userList } = useContext(UserContext);
 
     const { products } = useContext(ShopContext);
+
+    const { isBoxOpen } = useContext(ConfirmBoxContext);
 
     const goToAddProduct = () => {
         navigate('/dashboard/add-product');
@@ -106,6 +109,8 @@ function Dashboard() {
                     </div>
                 </div>
             </div>
+
+            {isBoxOpen && <ConfirmationBox />}
         </div>
     )
 }

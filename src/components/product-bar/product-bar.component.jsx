@@ -1,14 +1,50 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './product-bar.style.scss';
 import Button from '../button/button.component';
 import { faBucket, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { ConfirmBoxContext } from '../../context/confirm-box-context';
+import { ShopContext } from '../../context/shop-context';
 
 function ProductBar({ product }) {
     const navigate = useNavigate();
 
+    const { setIsBoxOpen, setProductToDelete } = useContext(ConfirmBoxContext);
+
+    const { shop } = useContext(ShopContext);
+
     const goToUpdateProduct = () => {
         navigate(`update-product/${product.id}`);
+    }
+
+    const showConfirmationBox = () => {
+        setIsBoxOpen(true);
+
+        try {
+            let foundProduct = null;
+
+            for (const category in shop) {
+                for(const item of shop[category]?.products) {
+                    if (item.id === product.id) {
+                        foundProduct = item;
+                        setProductToDelete({
+                            productID: item.id,
+                            productName: item.name,
+                            productPrice: item.price,
+                            productImageURL: item.imageURL,
+                            category: shop[category]?.title
+                        });
+                        break;
+                    }
+                }
+                if(foundProduct) {
+                    break;
+                }
+            }
+        }
+        catch(err) {
+            console.log(err);
+        }
     }
 
     return (
@@ -33,6 +69,7 @@ function ProductBar({ product }) {
 
                 <Button 
                     buttonType='icon' 
+                    onClick={showConfirmationBox} 
                     icon={faBucket} 
                 />
             </div>

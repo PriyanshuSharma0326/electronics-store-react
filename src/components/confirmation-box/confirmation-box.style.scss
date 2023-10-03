@@ -1,0 +1,46 @@
+.confirmation-box-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    z-index: 50;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .confirmation-box {
+        width: 40%;
+        padding: 2rem;
+        background-color: white;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+
+        .text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+
+            h1 {
+                font-size: 1.25rem;
+            }
+
+            h2 {
+                font-size: 0.9rem;
+            }
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 1.5rem;
+
+            button {
+                width: 50%;
+            }
+        }
+    }
+}

@@ -12,11 +12,21 @@ function UpdateProduct() {
 
     const navigate = useNavigate();
 
+    const goToDashboard = () => {
+        navigate('/dashboard');
+    }
+
     const [formInputs, setFormInputs] = useState({
         productName: '',
         productPrice: '',
         productImageURL: '',
         category: ''
+    });
+
+    const [defaultProductInfo, setDefaultProductInfo] = useState({
+        defaultProductName: '',
+        defaultProductPrice: '',
+        defaultProductImageURL: '',
     });
 
     const { shop } = useContext(ShopContext);
@@ -35,6 +45,11 @@ function UpdateProduct() {
                             productImageURL: product.imageURL,
                             category: shop[category]?.title
                         });
+                        setDefaultProductInfo({
+                            defaultProductName: product.name,
+                            defaultProductPrice: product.price,
+                            defaultProductImageURL: product.imageURL,
+                        });
                         break;
                     }
                 }
@@ -48,7 +63,6 @@ function UpdateProduct() {
         }
     }, [])
 
-    // const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     const defaultFormErrors = {
@@ -63,11 +77,6 @@ function UpdateProduct() {
         const { name, value } = e.target;
         setFormInputs({...formInputs, [name]: value});
     }
-
-    // const handleOptionClick = (item) => {
-    //     setFormInputs({ ...formInputs, category: item.category });
-    //     setIsOpen(false);
-    // }
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -97,7 +106,7 @@ function UpdateProduct() {
             setFormErrors(defaultFormErrors);
             setIsLoading(true);
             try {
-                await updateProductInCollection({ ...formInputs, image, id: param.productID });
+                await updateProductInCollection(defaultProductInfo, formInputs, image, param.productID);
             }
             catch(err) {
                 console.log(err);
@@ -168,7 +177,8 @@ function UpdateProduct() {
                     <Button 
                         buttonText='Cancel' 
                         type='button' 
-                        buttonType='inverted'
+                        buttonType='inverted' 
+                        onClick={goToDashboard} 
                     />
                     <Button 
                         form='product-update-form' 
