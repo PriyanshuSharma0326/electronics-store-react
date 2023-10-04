@@ -8,12 +8,11 @@ import { Button } from '../../constants/index';
 function AccountPage() {
     const navigate = useNavigate();
 
-    const { currentUser, userList } = useContext(UserContext);
-
-    const currentUserInfo = userList?.find(user => user.uid === currentUser.uid)
+    const { userDoc, setUserDoc } = useContext(UserContext);
 
     const signOutHandler = async () => {
         await signOutUser();
+        setUserDoc({})
         navigate('/accounts');
     }
 
@@ -26,11 +25,11 @@ function AccountPage() {
             <div className="account-container">
                 <div className="account">
                     <div className="profile-image-container">
-                        <img src={currentUserInfo?.photoURL} alt="" />
+                        <img src={userDoc?.photoURL} alt="" />
                     </div>
 
                     <h1 className='user-name'>
-                        {currentUserInfo?.displayName}
+                        {userDoc?.displayName}
                     </h1>
                 </div>
 
@@ -41,22 +40,22 @@ function AccountPage() {
                         <ul>
                             <li>
                                 <h2>Phone</h2>
-                                <p>{currentUserInfo?.phoneNumber}</p>
+                                <p>{userDoc?.phoneNumber}</p>
                             </li>
                             <li>
                                 <h2>Email</h2>
-                                <p>{currentUserInfo?.email}</p>
+                                <p>{userDoc?.email}</p>
                             </li>
                             <li>
                                 <h2>Address</h2>
-                                <p>{currentUserInfo?.address}</p>
+                                <p>{userDoc?.address}</p>
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 <div className="buttons-container">
-                    {currentUserInfo?.admin && <Button 
+                    {userDoc?.admin && <Button 
                         type='button' 
                         buttonType='blue'
                         buttonText='Go to Dashboard' 

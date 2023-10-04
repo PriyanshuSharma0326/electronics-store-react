@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import './dashboard.style.scss';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import SellIcon from '@mui/icons-material/Sell';
@@ -9,19 +9,17 @@ import UserInfoBar from '../../components/user-info-bar/user-info-bar.component'
 import ProductBar from '../../components/product-bar/product-bar.component';
 import Button from '../../components/button/button.component';
 import { useNavigate } from 'react-router-dom';
-import { ConfirmBoxContext } from '../../context/confirm-box-context';
+import { DashboardContext } from '../../context/dashboard-context';
 import ConfirmationBox from '../../components/confirmation-box/confirmation-box.component';
 
 function Dashboard() {
     const navigate = useNavigate();
 
-    const [selectedStat, setSelectedStat] = useState('Users');
-
     const { userList } = useContext(UserContext);
 
     const { products } = useContext(ShopContext);
 
-    const { isBoxOpen } = useContext(ConfirmBoxContext);
+    const { isBoxOpen, selectedStat, setSelectedStat } = useContext(DashboardContext);
 
     const goToAddProduct = () => {
         navigate('/dashboard/add-product');
@@ -110,9 +108,9 @@ function Dashboard() {
                 </div>
             </div>
 
-            {isBoxOpen && <ConfirmationBox />}
+            {isBoxOpen &&  <ConfirmationBox />}
         </div>
     )
 }
 
-export default Dashboard
+export default Dashboard;

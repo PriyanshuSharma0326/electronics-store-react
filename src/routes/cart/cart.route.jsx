@@ -2,15 +2,19 @@ import React, { useContext } from 'react';
 import './cart.styles.scss';
 import { CartContext } from '../../context/cart-context';
 import { CartItem, Button } from '../../constants/index';
+import { clearUserCart } from '../../lib/utils/firebase.utils';
+import { UserContext } from '../../context/user-context';
 
 function Cart() {
-    const { cartItems, cartCount, cartTotal, setCartItems } = useContext(CartContext);
+    const { userCart } = useContext(CartContext);
+
+    const { currentUser } = useContext(UserContext);
 
     const clearCart = () => {
-        setCartItems([]);
+        clearUserCart(currentUser.uid);
     }
 
-    const total = (cartTotal).toLocaleString('en-US', {
+    let total = userCart.reduce((prev, curr) => prev + Number(curr.price)*Number(curr.quantity), 0).toLocaleString('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
     });
@@ -21,14 +25,14 @@ function Cart() {
                 <div className="cart-container-header">
                     <h1>Shopping Cart</h1>
 
-                    {cartCount !== 0 && <Button 
+                    {userCart.length !== 0 && <Button 
                         buttonText='Deselect all items' 
                         buttonType='simple' 
                         onClick={clearCart} 
                     />}
                 </div>
 
-                {cartItems.map((item) => {
+                {userCart.map((item) => {
                     return (
                         <CartItem 
                             key={item.id} 
@@ -39,12 +43,12 @@ function Cart() {
                 })}
 
                 <div className="cart-subtotal">
-                    <h2>Subtotal &#40;{cartCount} item{cartCount > 1 ? 's' : ''}&#41;: <span>${total}</span></h2>
+                    <h2>Subtotal &#40;{userCart.reduce((prev, curr) => prev + Number(curr.quantity), 0)} item{userCart.length > 1 ? 's' : ''}&#41;: <span>${total}</span></h2>
                 </div>
             </div>
 
             <div className="subtotal-container">
-                <h2>Subtotal &#40;{cartCount} item{cartCount > 1 ? 's' : ''}&#41;: <span>${total}</span></h2>
+                <h2>Subtotal &#40;{userCart.reduce((prev, curr) => prev + Number(curr.quantity), 0)} item{userCart.length > 1 ? 's' : ''}&#41;: <span>${total}</span></h2>
 
                 <Button 
                     buttonText='Proceed to buy' 

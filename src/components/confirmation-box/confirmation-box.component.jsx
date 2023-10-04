@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import './confirmation-box.style.scss';
-import { ConfirmBoxContext } from '../../context/confirm-box-context';
+import { DashboardContext } from '../../context/dashboard-context';
 import Button from '../button/button.component';
 import { deleteProductFromCollection } from '../../lib/utils/firebase.utils';
 
 function useOutsideAlerter(ref) {
-    const { setIsBoxOpen } = useContext(ConfirmBoxContext);
+    const { setIsBoxOpen, setProductToDelete } = useContext(DashboardContext);
 
     useEffect(() => {
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target)) {
+                setProductToDelete({});
                 setIsBoxOpen(false);
             }
         }
@@ -26,9 +27,10 @@ function ConfirmationBox() {
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
 
-    const { setIsBoxOpen, productToDelete } = useContext(ConfirmBoxContext);
+    const { setIsBoxOpen, productToDelete, setProductToDelete } = useContext(DashboardContext);
 
     const hideConfirmationBox = () => {
+        setProductToDelete({});
         setIsBoxOpen(false);
     }
 
@@ -47,7 +49,7 @@ function ConfirmationBox() {
             <div className="confirmation-box" ref={wrapperRef}>
                 <div className='text'>
                     <h1>Do you really want to delete this product?</h1>
-                    <h2>{productToDelete?.name} - <span>&#40;${productToDelete?.price}&#41;</span></h2>
+                    <h2>{productToDelete?.productName} - <span>&#40;${productToDelete?.productPrice}&#41;</span></h2>
                 </div>
 
                 <div className="buttons-container">

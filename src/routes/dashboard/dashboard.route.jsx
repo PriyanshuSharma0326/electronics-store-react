@@ -3,11 +3,11 @@ import Dashboard from '../../pages/dashboard/dashboard';
 import { Route, Routes } from 'react-router-dom';
 import AddProduct from '../../pages/add-product/add-product';
 import UpdateProduct from '../../pages/update-product/update-product';
-import { ConfirmBoxContextProvider } from '../../context/confirm-box-context';
+import { DashboardContextProvider } from '../../context/dashboard-context';
 
 function DashboardRoute() {
     return (
-        <ConfirmBoxContextProvider>
+        <DashboardContextProvider>
             <Routes>
                 <Route 
                     index 
@@ -26,7 +26,7 @@ function DashboardRoute() {
                     element={<UpdateProduct />} 
                 />
             </Routes>
-        </ConfirmBoxContextProvider>
+        </DashboardContextProvider>
     )
 }
 

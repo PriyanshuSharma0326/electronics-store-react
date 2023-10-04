@@ -77,6 +77,15 @@ const createUserDoc = async (user, formData, imageURL) => {
     return userDocRef;
 }
 
+// Retrieve user doc
+const getUserDocFromCollection = async (userID) => {
+    const userDocRef = doc(db, 'users', userID);
+
+    const userDoc = await getDoc(userDocRef);
+
+    return userDoc;
+}
+
 // Method to Sign User In with Google Popup
 const googlePopupSignIn = () => signInWithPopup(auth, provider);
 
@@ -149,7 +158,7 @@ const getShopDataFromCollections = async () => {
     return shopData;
 }
 
-// Add Product to Collection
+// Admin Function - Add product to collection
 const addProductToCollection = async (productDoc) => {
     const { productName, productPrice, category, image } = productDoc;
 
@@ -177,11 +186,11 @@ const addProductToCollection = async (productDoc) => {
     });
 }
 
+// Admin Function - Update product in collection
 const updateProductInCollection = async (defaultProductInfo, productDoc, imageFile, id) => {
     const {
         productName,
         productPrice,
-        productImageURL,
         category
     } = productDoc;
 
@@ -248,6 +257,7 @@ const updateProductInCollection = async (defaultProductInfo, productDoc, imageFi
     }
 }
 
+// Admin Function - Delete product from collection
 const deleteProductFromCollection = async (productDoc) => {
     const {
         productID,
@@ -274,8 +284,150 @@ const deleteProductFromCollection = async (productDoc) => {
     }
 }
 
+// Add a product to user's cart
+const addProductToCart = async (productDoc, userID) => {
+    const {
+        id,
+        name,
+        price,
+        imageURL
+    } = productDoc;
+
+    const userCartDocRef = doc(db, 'users', userID);
+
+    try {
+        await updateDoc(userCartDocRef, {
+            cart: arrayUnion({
+                id: id,
+                quantity: 1,
+                imageURL: imageURL,
+                name: name,
+                price: price
+            })
+        })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+// Increase quantity of a product from user's cart
+const increaseQuantityOfProductInCart = async (productDoc, productQuantity, userID) => {
+    const {
+        id,
+        name,
+        price,
+        imageURL,
+    } = productDoc;
+
+    const userCartDocRef = doc(db, 'users', userID);
+
+    try {
+        await updateDoc(userCartDocRef, {
+            cart: arrayRemove({
+                id: id,
+                quantity: productQuantity,
+                imageURL: imageURL,
+                name: name,
+                price: price
+            })
+        })
+        await updateDoc(userCartDocRef, {
+            cart: arrayUnion({
+                id: id,
+                quantity: productQuantity + 1,
+                imageURL: imageURL,
+                name: name,
+                price: price
+            })
+        })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+// Decrease quantity of a product from user's cart
+const decreaseQuantityOfProductInCart = async (productDoc, productQuantity, userID) => {
+    const {
+        id,
+        name,
+        price,
+        imageURL,
+    } = productDoc;
+
+    const userCartDocRef = doc(db, 'users', userID);
+
+    try {
+        await updateDoc(userCartDocRef, {
+            cart: arrayRemove({
+                id: id,
+                quantity: productQuantity,
+                imageURL: imageURL,
+                name: name,
+                price: price
+            })
+        })
+        await updateDoc(userCartDocRef, {
+            cart: arrayUnion({
+                id: id,
+                quantity: productQuantity - 1,
+                imageURL: imageURL,
+                name: name,
+                price: price
+            })
+        })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+// Delete a product from user's cart
+const deleteProductFromCart = async (productDoc, userID) => {
+    const {
+        id,
+        name,
+        price,
+        imageURL,
+        quantity,
+    } = productDoc;
+
+    const userCartDocRef = doc(db, 'users', userID);
+
+    try {
+        await updateDoc(userCartDocRef, {
+            cart: arrayRemove({
+                id: id,
+                quantity: quantity,
+                imageURL: imageURL,
+                name: name,
+                price: price
+            })
+        })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+// Clear all items from user's cart
+const clearUserCart = async (userID) => {
+    const userCartDocRef = doc(db, 'users', userID);
+
+    try {
+        await updateDoc(userCartDocRef, {
+            cart: []
+        })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
 export {
     getUsers,
+    getUserDocFromCollection,
     googlePopupSignIn,
     createUserDoc,
     createUserEmailPasswordMethod,
@@ -287,4 +439,10 @@ export {
     addImageToStorage,
     updateProductInCollection,
     deleteProductFromCollection,
+
+    addProductToCart,
+    increaseQuantityOfProductInCart,
+    decreaseQuantityOfProductInCart,
+    deleteProductFromCart,
+    clearUserCart
 }

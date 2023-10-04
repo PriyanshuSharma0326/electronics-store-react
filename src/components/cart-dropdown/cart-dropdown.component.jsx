@@ -6,12 +6,12 @@ import CartDropdownItem from '../cart-dropdown-item/cart-dropdown-item.component
 import { CartContext } from '../../context/cart-context';
 
 function CartDropdown() {
-    const { cartItems, isCartOpen, setIsCartOpen } = useContext(CartContext);
+    const { isCartOpen, setIsCartOpen, userCart } = useContext(CartContext);
 
     return (
         <div className='cart-dropdown-container'>
             <div className="cart-dropdown-items">
-                {cartItems.map(item => {
+                {userCart.map(item => {
                     return (
                         <CartDropdownItem 
                             key={item.id} 

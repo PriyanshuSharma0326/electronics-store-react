@@ -1,9 +1,10 @@
 import { createContext, useState } from "react";
 
-export const ConfirmBoxContext = createContext();
+export const DashboardContext = createContext();
 
-export const ConfirmBoxContextProvider = ({ children }) => {
+export const DashboardContextProvider = ({ children }) => {
     const [isBoxOpen, setIsBoxOpen] = useState(false);
+    const [selectedStat, setSelectedStat] = useState('Users');
     const [productToDelete, setProductToDelete] = useState({});
 
     const contextValue = {
@@ -11,11 +12,13 @@ export const ConfirmBoxContextProvider = ({ children }) => {
         setIsBoxOpen,
         productToDelete,
         setProductToDelete,
+        selectedStat,
+        setSelectedStat
     };
 
     return (
-        <ConfirmBoxContext.Provider value={ contextValue }>
+        <DashboardContext.Provider value={ contextValue }>
             { children }
-        </ConfirmBoxContext.Provider>
+        </DashboardContext.Provider>
     )
 }

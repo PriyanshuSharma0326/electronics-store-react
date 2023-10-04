@@ -1,89 +1,41 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { UserContext } from "./user-context";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../lib/config/firebase";
 
 export const CartContext = createContext({
     isCartOpen: false,
     setIsCartOpen: () => null,
 });
 
-const addItem = (cartItems, item) => {
-    const itemSnapshot = cartItems.find((cartItem) => cartItem.id === item.id);
-
-    if(itemSnapshot) {
-        return cartItems.map((cartItem) => {
-            if(cartItem.id === item.id) {
-                return {...cartItem, quantity: cartItem.quantity + 1};
-            }
-            else {
-                return cartItem;
-            }
-        })
-    }
-    else {
-        return [...cartItems, {...item, quantity: 1}];
-    }
-};
-
-const removeItem = (cartItems, item) => {
-    const itemSnapshot = cartItems.find((cartItem) => cartItem.id === item.id);
-
-    if(itemSnapshot.quantity === 1) {
-        return clearItem(cartItems, item);
-    }
-    else {
-        return cartItems.map((cartItem) => {
-            if(cartItem.id === item.id) {
-                return {...cartItem, quantity: cartItem.quantity - 1}
-            }
-            else {
-                return cartItem;
-            }
-        })
-    }
-};
-
-const clearItem = (cartItems, item) => {
-    return cartItems.filter((cartItem) => cartItem.id !== item.id);
-};
-
 export const CartContextProvider = ({ children }) => {
     const [isCartOpen, setIsCartOpen] = useState(false);
-    const [cartItems, setCartItems] = useState([]);
-    const [cartCount, setCartCount] = useState(0);
-    const [cartTotal, setCartTotal] = useState(0);
 
-    const addProductToCart = (item) => {
-        setCartItems(addItem(cartItems, item));
-    }
-
-    const removeProductFromCart = (item) => {
-        setCartItems(removeItem(cartItems, item));
-    }
-
-    const clearProductFromCart = (item) => {
-        setCartItems(clearItem(cartItems, item));
-    }
+    const { currentUser } = useContext(UserContext);
+    const [userCart, setCart] = useState([]);
 
     useEffect(() => {
-        let count = cartItems.reduce((prev, curr) => prev + curr.quantity, 0);
-        setCartCount(count);
+        const getUserCartContents = () => {
+            const userCartDocRef = doc(db, 'users', currentUser.uid);
 
-        let total = cartItems.reduce((prev, curr) => prev + (curr.quantity * curr.price), 0);
-        setCartTotal(total);
-    }, [cartItems]);
+            const unsub = onSnapshot(userCartDocRef, (doc) => {
+                if(doc) {
+                    setCart(doc.data().cart);
+                }
+            });
+
+            return unsub;
+        }
+
+        currentUser?.uid && getUserCartContents();
+        setCart([]);
+    }, [currentUser]);
 
     const contextValue = {
         isCartOpen,
         setIsCartOpen,
-        cartItems,
-        setCartItems,
-        cartCount,
-        setCartCount,
-        cartTotal,
-        setCartTotal,
 
-        addProductToCart,
-        removeProductFromCart,
-        clearProductFromCart,
+        userCart,
     };
 
     return (

@@ -1,27 +1,29 @@
 import React, { useContext } from 'react';
 import './cart-item.styles.scss';
 import Button from '../button/button.component';
-import { CartContext } from '../../context/cart-context';
 
 import { faBucket, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { decreaseQuantityOfProductInCart, deleteProductFromCart, increaseQuantityOfProductInCart } from '../../lib/utils/firebase.utils';
+import { UserContext } from '../../context/user-context';
 
 function CartItem({ item }) {
-    const {
-        addProductToCart,
-        removeProductFromCart,
-        clearProductFromCart, 
-    } = useContext(CartContext);
+    const { currentUser } = useContext(UserContext);
 
     const plusButtonHandler = () => {
-        addProductToCart(item);
+        increaseQuantityOfProductInCart(item, item.quantity, currentUser.uid);
     }
 
     const minusButtonHandler = () => {
-        removeProductFromCart(item);
+        if(item.quantity > 1) {
+            decreaseQuantityOfProductInCart(item, item.quantity, currentUser.uid);
+        }
+        else {
+            deleteProductFromCart(item, currentUser.uid);
+        }
     }
 
-    const deleteItemFromCart = () => {
-        clearProductFromCart(item);
+    const handleDeleteItemFromCart = () => {
+        deleteProductFromCart(item, currentUser.uid);
     }
 
     return (
@@ -40,7 +42,7 @@ function CartItem({ item }) {
                         <Button 
                             buttonText='Delete' 
                             buttonType='simple' 
-                            onClick={deleteItemFromCart} 
+                            onClick={handleDeleteItemFromCart} 
                         />
                     </h2>
                 </div>

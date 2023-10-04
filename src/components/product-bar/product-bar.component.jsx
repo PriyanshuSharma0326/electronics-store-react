@@ -3,13 +3,13 @@ import './product-bar.style.scss';
 import Button from '../button/button.component';
 import { faBucket, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { ConfirmBoxContext } from '../../context/confirm-box-context';
+import { DashboardContext } from '../../context/dashboard-context';
 import { ShopContext } from '../../context/shop-context';
 
 function ProductBar({ product }) {
     const navigate = useNavigate();
 
-    const { setIsBoxOpen, setProductToDelete } = useContext(ConfirmBoxContext);
+    const { setIsBoxOpen, setProductToDelete } = useContext(DashboardContext);
 
     const { shop } = useContext(ShopContext);
 
@@ -18,8 +18,6 @@ function ProductBar({ product }) {
     }
 
     const showConfirmationBox = () => {
-        setIsBoxOpen(true);
-
         try {
             let foundProduct = null;
 
@@ -45,6 +43,7 @@ function ProductBar({ product }) {
         catch(err) {
             console.log(err);
         }
+        setIsBoxOpen(true);
     }
 
     return (
