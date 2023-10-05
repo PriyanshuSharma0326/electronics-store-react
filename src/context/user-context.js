@@ -7,9 +7,10 @@ export const UserContext = createContext({
 });
 
 export const UserContextProvider = ({ children }) => {
+    const [loading, setLoading] = useState(false);
+
     const [currentUser, setCurrentUser] = useState(null);
     const [userList, setUserList] = useState([]);
-
     const [userDoc, setUserDoc] = useState({});
 
     useEffect(()=> {
@@ -19,10 +20,10 @@ export const UserContextProvider = ({ children }) => {
                     setCurrentUser(user);
                 }
                 else {
-                    // setLoading(true);
+                    setLoading(true);
                     setTimeout(() => {
                         setCurrentUser(user);
-                        // setLoading(false);
+                        setLoading(false);
                     }, 5000);
                 }
             }
@@ -69,6 +70,7 @@ export const UserContextProvider = ({ children }) => {
         setUserList,
         userDoc,
         setUserDoc,
+        loading
     };
 
     return (

@@ -14,6 +14,6 @@ export const validatePhoneNumber = (phoneNumber) => {
 };
 
 export const validateAddress = (address) => {
-    const regex = /^[a-zA-Z0-9]+$/;
+    const regex = /^[a-zA-Z0-9,/ -]+$/;
     return regex.test(address);
 }

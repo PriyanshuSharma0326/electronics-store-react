@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
-
-import { getShopDataFromCollections } from '../lib/utils/firebase.utils';
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../lib/config/firebase";
 
 export const ShopContext = createContext({
     shopData: [],
@@ -13,11 +13,23 @@ export const ShopContextProvider = ({ children }) => {
 
     useEffect(() => {
         const getShop = async () => {
-            const shopData = await getShopDataFromCollections();
-            setShop(shopData);
+            const shopDocRef = collection(db, 'categories');
+
+            const unsub = onSnapshot(shopDocRef, (doc) => {
+                if(doc) {
+                    const data = doc.docs.map(docSnapshot => {
+                        return docSnapshot.data();
+                    });
+
+                    setShop(data);
+                }
+            });
+
+            return unsub;
         }
 
         getShop();
+        setShop([]);
     }, []);
 
     useEffect(() => {

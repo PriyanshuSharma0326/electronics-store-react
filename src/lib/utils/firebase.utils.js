@@ -67,6 +67,7 @@ const createUserDoc = async (user, formData, imageURL) => {
                 address,
                 phoneNumber,
                 admin: false,
+                cart: []
             });
         }
         catch(err) {
@@ -141,21 +142,6 @@ const signOutUser = () => signOut(auth);
 // Method to Listen to Auth State Changes
 const authStateChangeListener = (callback) => {
     onAuthStateChanged(auth, callback);
-}
-
-// Method to Get Shop Data from collections
-const getShopDataFromCollections = async () => {
-    const collectionRef = collection(db, 'categories');
-
-    const q = query(collectionRef);
-
-    const querySnapshot = await getDocs(q);
-
-    const shopData = querySnapshot.docs.map(docSnapshot => {
-        return docSnapshot.data();
-    });
-
-    return shopData;
 }
 
 // Admin Function - Add product to collection
@@ -434,7 +420,6 @@ export {
     signInUserEmailPasswordMethod,
     signOutUser,
     authStateChangeListener,
-    getShopDataFromCollections,
     addProductToCollection,
     addImageToStorage,
     updateProductInCollection,

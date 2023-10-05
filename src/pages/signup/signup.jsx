@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './signup.styles.scss';
 import { addImageToStorage, createUserEmailPasswordMethod } from '../../lib/utils/firebase.utils';
 import { validateAddress, validateEmail, validatePassword, validatePhoneNumber } from '../../lib/utils/utils';
 import { FormInput, Button } from '../../constants/index';
 import { useNavigate } from 'react-router-dom';
 import AddPhotoAlternateTwoToneIcon from '@mui/icons-material/AddPhotoAlternateTwoTone';
+import { PulseLoader } from 'react-spinners';
+import { UserContext } from '../../context/user-context';
 
 function SignUp() {
     const navigate = useNavigate();
+
+    const { loading } = useContext(UserContext);
 
     const handleClick = () => {
         navigate("/accounts/login");
@@ -220,11 +224,15 @@ function SignUp() {
                     </div>
                 </form>
 
+                {loading ? 
+                <div className="loader">
+                    <PulseLoader size='6' color="#1DB954" />
+                </div> : 
                 <Button 
                     form='registeration-form'
                     buttonText='Sign Up' 
                     type='submit' 
-                />
+                />}
             </div>
 
             <div className="go-to-login">
