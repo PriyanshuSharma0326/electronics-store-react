@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { signOutUser } from '../../lib/utils/firebase.utils';
 import { UserContext } from '../../context/user-context';
 import { Button } from '../../constants/index';
+import OrderInfoBarAccountPage from '../../components/order-info-bar-account-page/order-info-bar-account-page';
 
 function AccountPage() {
     const navigate = useNavigate();
@@ -67,6 +68,18 @@ function AccountPage() {
                         onClick={signOutHandler} 
                     />
                 </div>
+            </div>
+
+            <div className="user-orders">
+                {userDoc?.orders?.length && <h1>Orders</h1>}
+                {userDoc?.orders?.map(order => {
+                    return (
+                        <OrderInfoBarAccountPage 
+                            key={order.orderID} 
+                            orderInfo={order} 
+                        />
+                    )
+                })}
             </div>
         </div>
     )

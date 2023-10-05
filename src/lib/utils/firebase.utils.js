@@ -67,7 +67,8 @@ const createUserDoc = async (user, formData, imageURL) => {
                 address,
                 phoneNumber,
                 admin: false,
-                cart: []
+                cart: [],
+                orders: [],
             });
         }
         catch(err) {
@@ -411,6 +412,39 @@ const clearUserCart = async (userID) => {
     }
 }
 
+const addOrderedProductToCollection = async (orderInfo) => {
+    const orderDocRef = doc(db, 'orders', orderInfo.orderID);
+
+    const {
+        item,
+        orderDate,
+        paymentID,
+        orderID,
+        userID
+    } = orderInfo;
+
+    const userOrdersRef = doc(db, 'users', userID)
+
+    const orderSnapshot = await getDoc(orderDocRef);
+
+    if(!orderSnapshot.exists()) {
+        try {
+            await setDoc(orderDocRef, orderInfo);
+            await updateDoc(userOrdersRef, {
+                orders: arrayUnion({
+                    item,
+                    orderDate,
+                    paymentID,
+                    orderID,
+                })
+            })
+        }
+        catch(err) {
+            console.log(err);
+        }
+    }
+}
+
 export {
     getUsers,
     getUserDocFromCollection,
@@ -429,5 +463,7 @@ export {
     increaseQuantityOfProductInCart,
     decreaseQuantityOfProductInCart,
     deleteProductFromCart,
-    clearUserCart
+    clearUserCart,
+
+    addOrderedProductToCollection
 }

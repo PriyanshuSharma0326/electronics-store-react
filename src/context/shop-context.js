@@ -1,15 +1,20 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../lib/config/firebase";
+import { UserContext } from "./user-context";
 
 export const ShopContext = createContext({
     shopData: [],
 });
 
 export const ShopContextProvider = ({ children }) => {
+    const { userDoc } = useContext(UserContext);
+
     const [shop, setShop] = useState([]);
 
     const [products, setProducts] = useState([]);
+
+    const [orders, setOrders] = useState([]);
 
     useEffect(() => {
         const getShop = async () => {
@@ -33,6 +38,27 @@ export const ShopContextProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
+        const getOrders = async () => {
+            const ordersDocRef = collection(db, 'orders');
+
+            const unsub = onSnapshot(ordersDocRef, (doc) => {
+                if(doc) {
+                    const data = doc.docs.map(docSnapshot => {
+                        return docSnapshot.data();
+                    });
+
+                    setOrders(data);
+                }
+            });
+
+            return unsub;
+        }
+
+        userDoc?.admin && getOrders();
+        setOrders([]);
+    }, [userDoc]);
+
+    useEffect(() => {
         try {
             let productsList = [];
             for (const shopItem of shop) {
@@ -51,6 +77,7 @@ export const ShopContextProvider = ({ children }) => {
         shop,
         setShop,
         products,
+        orders,
     };
 
     return (

@@ -2,6 +2,7 @@
     margin: 0 auto;
     margin-top: 7.5rem;
     width: 85%;
+    padding-bottom: 2rem;
 
     .account-container {
         display: flex;
@@ -45,8 +46,6 @@
             border-radius: 1rem;
 
             .detail-container {
-                // margin-top: 1.5rem;
-
                 h1 {
                     font-size: 1.25rem;
                     font-weight: 500;
@@ -90,5 +89,14 @@
                 width: 50%;
             }
         }
+    }
+
+    .user-orders {
+        width: 65%;
+        margin: 0 auto;
+        margin-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
     }
 }

@@ -1,5 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import { authStateChangeListener, getUserDocFromCollection, getUsers } from '../lib/utils/firebase.utils';
+import { authStateChangeListener, getUsers } from '../lib/utils/firebase.utils';
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../lib/config/firebase";
 
 export const UserContext = createContext({
     currentUser: null,
@@ -52,11 +54,19 @@ export const UserContextProvider = ({ children }) => {
     useEffect(() => {
         try {
             const getUserDoc = async () => {
-                const user = await getUserDocFromCollection(currentUser.uid);
-                setUserDoc(user.data());
+                const UserDocRef = doc(db, 'users', currentUser.uid);
+    
+                const unsub = onSnapshot(UserDocRef, (doc) => {
+                    if(doc) {
+                        setUserDoc(doc.data());
+                    }
+                });
+    
+                return unsub;
             }
-
+    
             currentUser && getUserDoc();
+            setUserDoc([]);
         }
         catch(err) {
             console.log(err);

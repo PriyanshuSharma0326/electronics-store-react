@@ -11,13 +11,14 @@ import Button from '../../components/button/button.component';
 import { useNavigate } from 'react-router-dom';
 import { DashboardContext } from '../../context/dashboard-context';
 import ConfirmationBox from '../../components/confirmation-box/confirmation-box.component';
+import OrderInfoBarDashboard from '../../components/order-info-bar-dashboard/order-info-bar-dashboard';
 
 function Dashboard() {
     const navigate = useNavigate();
 
     const { userList } = useContext(UserContext);
 
-    const { products } = useContext(ShopContext);
+    const { products, orders } = useContext(ShopContext);
 
     const { isBoxOpen, selectedStat, setSelectedStat } = useContext(DashboardContext);
 
@@ -62,6 +63,17 @@ function Dashboard() {
                             )
                         })}
                     </div>}
+
+                    {selectedStat === 'Orders' && <div className="orders">
+                        {orders.map(order => {
+                            return (
+                                <OrderInfoBarDashboard 
+                                    key={order.orderID} 
+                                    orderInfo={order} 
+                                />
+                            )
+                        })}
+                    </div>}
                 </div>
 
                 <div className="stats">
@@ -102,7 +114,7 @@ function Dashboard() {
                         </div>
                         <div className="stat-count">
                             <p>Orders</p>
-                            <span>3</span>
+                            <span>{orders?.length}</span>
                         </div>
                     </div>
                 </div>
