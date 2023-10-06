@@ -110,4 +110,12 @@ $grey: #6B728E;
             }
         }
     }
+
+    @media (max-width: 1024px) {
+        padding-bottom: 4rem;
+    }
+
+    @media (max-width: 768px) {
+        padding-bottom: unset;
+    }
 }

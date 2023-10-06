@@ -6,6 +6,7 @@ import { UserContext } from '../../context/user-context';
 import { Button } from '../../constants/index';
 import OrderInfoBarAccountPage from '../../components/order-info-bar-account-page/order-info-bar-account-page';
 import { ShopContext } from '../../context/shop-context';
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
 
 function AccountPage() {
     const navigate = useNavigate();
@@ -56,6 +57,12 @@ function AccountPage() {
                         buttonType='simple' 
                         onClick={goToUpdateProfilePage} 
                     />
+
+                    <Button 
+                        buttonType='icon' 
+                        onClick={goToUpdateProfilePage} 
+                        icon={faPencil} 
+                    />
                 </div>
 
                 <div className="account-details">
@@ -79,9 +86,9 @@ function AccountPage() {
                     </div>
                 </div>
 
-                <div className="warning">
-                    {(!userDoc.address || !userDoc.phoneNumber) && <h1>Update Profile to continue shopping!</h1>}
-                </div>
+                {(!userDoc.address || !userDoc.phoneNumber) && <div className="warning">
+                    <h1>Update Profile to continue shopping!</h1>
+                </div>}
 
                 <div className="buttons-container">
                     {userDoc?.admin && <Button 

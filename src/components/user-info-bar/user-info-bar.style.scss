@@ -46,10 +46,12 @@
         }
     }
 
-    .orders {
+    .orders-div {
         margin-left: auto;
-
+        
         h1 {
+            margin-left: -1rem;
+            margin-right: -1rem;
             font-size: 1.25rem;
             font-weight: 500;
 
@@ -61,5 +63,78 @@
 
     &:hover {
         background-color: var(--grey-7);
+    }
+
+    @media (max-width: 1024px) {
+        padding: 1rem;
+
+        .user-image-container {
+            width: 4.5rem;
+            height: 4.5rem;
+        }
+    
+        .user-details {
+            > h1 {
+                font-size: 1.25rem;
+    
+                span {
+                    font-size: 0.9rem;
+                }
+            }
+    
+            h2 {
+                font-size: 0.9rem;
+                font-weight: 500;
+    
+                span {
+                    font-size: 0.85rem;
+                }
+            }
+        }
+    
+        .orders-div {
+            h1 {
+                font-size: 0.85rem;
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding: 1rem 2rem;
+    }
+
+    @media (max-width: 426px) {
+        padding: 2rem 1rem;
+        flex-direction: column;
+
+        .user-image-container {
+            width: 6rem;
+            height: 6rem;
+        }
+    
+        .user-details {
+            gap: 0.5rem;
+            width: 100%;
+    
+            > h1 {
+                font-size: 1.5rem;
+    
+                span {
+                    font-size: 1rem;
+                }
+            }
+    
+            h2 {
+                font-size: 1rem;
+    
+                span {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    
+        .orders-div {
+            display: none;
+        }
     }
 }

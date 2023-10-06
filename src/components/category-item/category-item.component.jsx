@@ -17,7 +17,9 @@ function CategoryItem({ title, imageURL, products }) {
             className='category-container' 
             onClick={() => routeHandler(title)} 
         >
-            <img className="background-image" src={imageURL} alt={title} />
+            <div className="background-image-container">
+                <img className="background-image" src={imageURL} alt={title} />
+            </div>
 
             <div className="category-body-container">
                 <h2 className='title'>{title}</h2>

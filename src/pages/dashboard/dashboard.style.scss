@@ -1,7 +1,7 @@
 $grey: #6B728E;
 
 .dashboard-container {
-    width: 85%;
+    width: 90%;
     margin: 0 auto;
     margin-top: 7.5rem;
     padding-bottom: 2rem;
@@ -16,7 +16,7 @@ $grey: #6B728E;
         margin-top: 1.5rem;
 
         .dashboard-data {
-            width: 80%;
+            width: 70%;
             border: 1px solid $grey;
             padding: 1rem 0;
             display: flex;
@@ -60,7 +60,7 @@ $grey: #6B728E;
         }
 
         .stats {
-            width: 20%;
+            width: 30%;
             display: flex;
             flex-direction: column;
             gap: 0.8rem;
@@ -106,6 +106,144 @@ $grey: #6B728E;
                 &:hover, &.active {
                     cursor: pointer;
                     background-color: var(--grey-7);
+                }
+            }
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .page-title {
+            font-size: 2rem;
+        }
+
+        .dashboard-main {
+            .dashboard-data {
+                width: 75%;
+
+                .dashboard-title {
+                    padding: 0 1.5rem;
+    
+                    > h1 {
+                        font-size: 1.5rem;
+                    }
+                }
+
+                .products {
+                    grid-template-columns: repeat(1, 1fr);
+                }
+            }
+
+            .stats {
+                width: 25%;
+                gap: 0.75rem;
+                padding: 0.9rem 0;
+    
+                .stats-section-title {
+                    font-size: 1.15rem;
+                }
+    
+                .stat-box {
+                    padding: 0.25rem 0.9rem;
+    
+                    .icon {
+                        padding: 0.5rem;
+    
+                        .MuiSvgIcon-root {
+                            font-size: 1.15rem;
+                        }
+                    }
+    
+                    .stat-count {
+                        margin-right: 1rem;
+    
+                        p {
+                            font-size: 1rem;
+                        }
+    
+                        span {
+                            font-size: 1rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .dashboard-main {
+            flex-direction: column-reverse;
+
+            .dashboard-data {
+                width: 100%;
+
+                .dashboard-title {
+                    > h1 {
+                        font-size: 1.75rem;
+                    }
+                }
+            }
+
+            .stats {
+                width: 50%;
+
+                .stats-section-title {
+                    font-size: 1.35rem;
+                }
+
+                .stat-box {
+                    .icon {
+                        .MuiSvgIcon-root {
+                            font-size: 1.25rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 426px) {
+        .dashboard-main {
+            .dashboard-data {
+                width: 100%;
+
+                .dashboard-title {
+                    padding: 0 1rem;
+
+                    > h1 {
+                        font-size: 1.75rem;
+                    }
+                }
+
+                .products {
+                    padding: 0 1rem;
+                }
+            }
+
+            .stats {
+                width: 100%;
+                
+                .stats-section-title {
+                    font-size: 1.35rem;
+                }
+    
+                .stat-box {
+                    padding: 0.25rem 1rem;
+    
+                    .icon {
+                        .MuiSvgIcon-root {
+                            font-size: 1.5rem;
+                        }
+                    }
+    
+                    .stat-count {
+                        p {
+                            font-size: 1.15rem;
+                        }
+    
+                        span {
+                            font-size: 1.15rem;
+                        }
+                    }
                 }
             }
         }

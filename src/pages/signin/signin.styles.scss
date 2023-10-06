@@ -65,4 +65,16 @@ $grey: #6B728E;
             }
         }
     }
+
+    @media (max-width: 1024px) {
+        width: 20rem;
+        margin-top: 11.5rem;
+        padding-bottom: 4rem;
+    }
+
+    @media (max-width: 768px) {
+        width: 22rem;
+        margin-top: 0;
+        padding-bottom: 0;
+    }
 }

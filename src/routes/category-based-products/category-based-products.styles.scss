@@ -10,7 +10,6 @@
     padding-bottom: 2.5rem;
 
     @media (max-width: 1440px) {
-        width: fit-content;
         column-gap: 2.5rem;
     }
 
@@ -20,9 +19,11 @@
 
     @media (max-width: 768px) {
         grid-template-columns: repeat(2, 1fr);
+        width: 80%;
     }
 
     @media (max-width: 426px) {
         grid-template-columns: repeat(1, 1fr);
+        width: 75%;
     }
 }

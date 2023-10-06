@@ -17,12 +17,11 @@
     }
 
     @media (max-width: 768px) {
-        width: 75%;
         grid-template-columns: repeat(2, 1fr);
     }
 
     @media (max-width: 426px) {
         grid-template-columns: repeat(1, 1fr);
-        width: fit-content;
+        width: 80%;
     }
 }

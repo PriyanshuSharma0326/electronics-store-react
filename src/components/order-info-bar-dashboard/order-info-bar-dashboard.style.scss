@@ -162,4 +162,149 @@
             border: 1px solid var(--black);
         }
     }
+
+    @media (max-width: 1024px) {
+        .order-info {
+            max-height: 10rem;
+            gap: 0.85rem;
+        
+            .order-product-details {
+                > h1 {
+                    font-size: 0.95rem;
+                }
+        
+                h2 {
+                    font-size: 0.8rem;
+        
+                    span {
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+
+            .order-by-details {
+                > h1 {
+                    font-size: 0.95rem;
+                }
+        
+                h2 {
+                    font-size: 0.8rem;
+        
+                    span {
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+        }
+
+        .order-status-change {
+            .form-dropdown-input {
+
+                .dropdown-button {
+                    padding: 0.5rem 0.9rem;
+                }
+
+                .dropdown-options {
+                    height: 7.5rem;
+        
+                    .dropdown-option {
+                        padding: 0.5rem 0.9rem;
+                    }
+                }
+            }
+
+            .delivered-status {
+                padding: 0.5rem 0.9rem;
+            }
+
+            .cancelled-status {
+                padding: 0.5rem 0.9rem;
+            }
+        }
+    }
+
+    @media (max-width: 426px) {
+        .order-info {
+            max-height: fit-content;
+            flex-direction: column;
+
+            .product-image-container {
+                max-height: 100%;
+                width: 40%;
+                margin: 0 auto;
+                padding: 0.25rem;
+            }
+        
+            .order-product-details {
+                width: 100%;
+                gap: 0.5rem;
+        
+                > h1 {
+                    font-size: 1.15rem;
+                }
+        
+                h2 {
+                    font-size: 1rem;
+        
+                    span {
+                        font-size: 1rem;
+                    }
+                }
+            }
+    
+            .order-by-details {
+                width: 100%;
+                gap: 0.5rem;
+        
+                > h1 {
+                    font-size: 1.15rem;
+                }
+        
+                h2 {
+                    font-size: 1rem;
+        
+                    span {
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+
+        .order-status-change {
+            .form-dropdown-input {
+                width: 70%;
+    
+                .dropdown-button {
+                    padding: 0.65rem 1rem;
+                }
+    
+                .dropdown-options {
+                    height: 8.4rem;
+        
+                    .dropdown-option {
+                        padding: 0.65rem 1rem;
+        
+                        .dropdown-icon {
+                            max-width: 2.15rem;
+                        }
+        
+                        p {
+                            font-size: 1rem;
+                            margin-left: 0.5rem;
+                        }
+                    }
+                }
+            }
+    
+            .delivered-status {
+                width: 70%;
+                padding: 0.65rem 1rem;
+            }
+    
+            .cancelled-status {
+                width: 70%;
+                padding: 0.65rem 1rem;
+            }
+        }
+    }
 }

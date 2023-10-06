@@ -14,7 +14,7 @@ function UserInfoBar({ user }) {
                 <h2>Phone: <span>{user.phoneNumber}</span></h2>
             </div>
 
-            <div className="orders">
+            <div className="orders-div">
                 <h1>Orders: <span>{user.orders?.length}</span></h1>
             </div>
         </div>

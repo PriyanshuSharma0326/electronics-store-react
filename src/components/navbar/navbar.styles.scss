@@ -25,10 +25,6 @@
         margin-left: 1rem;
         font-size: 1.5rem;
         color: var(--white);
-
-        @media (max-width: 426px) {
-            display: none;
-        }
     }
 
     .nav-links-container {
@@ -70,10 +66,24 @@
     }
 
     @media (max-width: 768px) {
-        padding: 1rem 4rem;
+        padding: 1rem 3rem;
     }
 
     @media (max-width: 426px) {
         padding: 1rem 1.5rem;
+
+        .nav-title {
+            display: none;
+        }
+
+        .nav-links-container {
+            li {
+                display: none;
+
+                &:last-of-type {
+                    display: flex;
+                }
+            }
+        }
     }
 }

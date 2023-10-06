@@ -34,7 +34,7 @@ function App() {
     
         return children;
     };
-    
+
     return (
         <Routes>
             <Route path='/' element={<SharedLayout />}>

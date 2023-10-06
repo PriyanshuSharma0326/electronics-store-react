@@ -38,12 +38,16 @@
                 }
             }
 
-            button {
+            > button {
                 position: absolute;
                 right: 0;
                 top: 50%;
                 transform: translate(-3rem, -50%);
                 background-color: transparent;
+
+                &:last-of-type {
+                    display: none;
+                }
             }
         }
 
@@ -118,5 +122,183 @@
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+        width: 100%;
+
+        .account-container {
+            gap: 1.5rem;
+            
+            .account {
+                width: 70%;
+                padding: 1rem 2.5rem;
+    
+                .profile-image-container {
+                    width: 7.5rem;
+                    height: 7.5rem;
+                }
+    
+                > button {
+                    transform: translate(-2.5rem, -50%);
+                }
+            }
+    
+            .account-details {
+                width: 70%;
+                padding: 1rem 2.5rem;
+    
+                .detail-container {
+                    h1 {
+                        font-size: 1.15rem;
+                    }
+    
+                    ul {
+                        gap: 0.45rem;
+    
+                        li {
+                            gap: 0.9rem;
+    
+                            h2 {
+                                width: 3.75rem;
+                                font-size: 0.9rem;
+                            }
+    
+                            p {
+                                font-size: 0.85rem;
+                            }
+                        }
+                    }
+                }
+            }
+    
+            .warning {
+                h1 {
+                    font-size: 0.85rem;
+                }
+            }
+        }
+
+        .user-orders {
+            width: 70%;
+            margin-top: 1.25rem;
+            gap: 1.25rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .account-container {
+            .account {
+                width: 80%;
+    
+                .profile-image-container {
+                    width: 6.5rem;
+                    height: 6.5rem;
+                }
+    
+                > button {
+                    font-size: 0.85rem;
+                    transform: translate(-1.5rem, -50%);
+                }
+            }
+    
+            .account-details {
+                width: 80%;
+            }
+    
+            .warning {
+                h1 {
+                    font-size: 0.75rem;
+                }
+            }
+        }
+
+        .user-orders {
+            width: 80%;
+            margin-top: 1.25rem;
+            gap: 1.25rem;
+        }
+    }
+
+    @media (max-width: 426px) {
+        .account-container {
+            gap: 1.5rem;
+            
+            .account {
+                width: 90%;
+                padding: 1rem 1.5rem;
+                gap: 1rem;
+    
+                .profile-image-container {
+                    width: 5rem;
+                    height: 5rem;
+                }
+
+                .user-name {
+                    font-size: 1.15rem;
+                }
+    
+                > button {
+                    display: none;
+
+                    &:last-of-type {
+                        display: flex;
+                        color: black;
+                        border: none;
+                        padding: 0;
+                        border-radius: 0;
+                        width: 1.25rem;
+                        height: 1.25rem;
+                    }
+                }
+            }
+
+            .account-details {
+                width: 90%;
+                padding: 1rem 1.5rem;
+    
+                .detail-container {
+                    h1 {
+                        font-size: 1.05rem;
+                    }
+    
+                    ul {
+                        gap: 0.45rem;
+    
+                        li {
+                            gap: 0.85rem;
+    
+                            h2 {
+                                width: 3.5rem;
+                                font-size: 0.85rem;
+                            }
+    
+                            p {
+                                font-size: 0.8rem;
+                            }
+                        }
+                    }
+                }
+            }
+    
+            .warning {
+                h1 {
+                    font-size: 0.85rem;
+                }
+            }
+
+            .buttons-container {
+                width: 90%;
+                gap: 1rem;
+            }
+        }
+
+        .user-orders {
+            width: 90%;
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
     }
 }
