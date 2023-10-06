@@ -2,8 +2,7 @@
     padding: 1rem;
     width: 100%;
     border: 1px solid var(--black);
-    display: flex;
-    flex-direction: column;
+    position: relative;
 
     .order-info {
         width: 100%;
@@ -47,6 +46,24 @@
                     font-size: 0.9rem;
                 }
             }
+
+            .bind {
+                display: flex;
+                gap: 1.5rem;
+            }
+
+            .order-status {
+                span {
+                    font-weight: 700;
+                }
+            }
         }
+    }
+
+    button {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(-1rem, -50%);
     }
 }

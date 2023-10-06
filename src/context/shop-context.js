@@ -54,7 +54,7 @@ export const ShopContextProvider = ({ children }) => {
             return unsub;
         }
 
-        userDoc?.admin && getOrders();
+        userDoc && getOrders();
         setOrders([]);
     }, [userDoc]);
 

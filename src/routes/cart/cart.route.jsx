@@ -5,8 +5,11 @@ import { CartItem, Button } from '../../constants/index';
 import { addOrderedProductToCollection, clearUserCart } from '../../lib/utils/firebase.utils';
 import { UserContext } from '../../context/user-context';
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 
 function Cart() {
+    const navigate = useNavigate();
+
     const { userCart, exchangeRate } = useContext(CartContext);
 
     const { currentUser, userDoc } = useContext(UserContext);
@@ -53,6 +56,10 @@ function Cart() {
                             }),
                             paymentID,
                             orderID: uuidv4(),
+                            orderStatus: {
+                                statusName: 'Pending',
+                                statusID: 0
+                            },
                             ...orderMadeBy
                         }
                     )
@@ -68,6 +75,7 @@ function Cart() {
                         addOrderedProductToCollection(orderInfo[0]);
                     }
                     clearUserCart(userDoc?.uid);
+                    navigate('/account');
                 }
                 catch (err) {
                     console.log(err);

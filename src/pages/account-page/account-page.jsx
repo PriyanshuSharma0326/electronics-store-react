@@ -1,15 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './account-page.style.scss';
 import { useNavigate } from 'react-router-dom';
 import { signOutUser } from '../../lib/utils/firebase.utils';
 import { UserContext } from '../../context/user-context';
 import { Button } from '../../constants/index';
 import OrderInfoBarAccountPage from '../../components/order-info-bar-account-page/order-info-bar-account-page';
+import { ShopContext } from '../../context/shop-context';
 
 function AccountPage() {
     const navigate = useNavigate();
 
     const { userDoc, setUserDoc } = useContext(UserContext);
+
+    const { orders } = useContext(ShopContext);
+
+    const [userOrders, setUserOrders] = useState([]);
+
+    useEffect(() => {
+        const getUserOrders = () => {
+            const filteredOrders = orders.filter(order => userDoc.orders?.includes(order.orderID));
+            setUserOrders(filteredOrders);
+        }
+
+        userDoc && getUserOrders();
+    }, [orders]);
 
     const signOutHandler = async () => {
         await signOutUser();
@@ -19,6 +33,10 @@ function AccountPage() {
 
     const goToDashboard = () => {
         navigate('/dashboard');
+    }
+
+    const goToUpdateProfilePage =() => {
+        navigate('/account/update');
     }
 
     return (
@@ -32,6 +50,12 @@ function AccountPage() {
                     <h1 className='user-name'>
                         {userDoc?.displayName}
                     </h1>
+
+                    <Button 
+                        buttonText='Update Profile' 
+                        buttonType='simple' 
+                        onClick={goToUpdateProfilePage} 
+                    />
                 </div>
 
                 <div className="account-details">
@@ -71,8 +95,8 @@ function AccountPage() {
             </div>
 
             <div className="user-orders">
-                {userDoc?.orders?.length && <h1>Orders</h1>}
-                {userDoc?.orders?.map(order => {
+                {userOrders.length !== 0 && <h1>Orders</h1>}
+                {userOrders?.map(order => {
                     return (
                         <OrderInfoBarAccountPage 
                             key={order.orderID} 

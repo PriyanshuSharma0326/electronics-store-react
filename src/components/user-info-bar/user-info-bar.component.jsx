@@ -1,7 +1,5 @@
 import React from 'react';
 import './user-info-bar.style.scss';
-import { faBucket } from '@fortawesome/free-solid-svg-icons';
-import Button from '../button/button.component';
 
 function UserInfoBar({ user }) {
     return (
@@ -16,10 +14,9 @@ function UserInfoBar({ user }) {
                 <h2>Phone: <span>{user.phoneNumber}</span></h2>
             </div>
 
-            <Button 
-                buttonType='icon' 
-                icon={faBucket} 
-            />
+            <div className="orders">
+                <h1>Orders: <span>{user.orders?.length}</span></h1>
+            </div>
         </div>
     )
 }

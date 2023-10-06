@@ -56,7 +56,7 @@ function App() {
                     <Route path='register' element={<SignUp />} />
                 </Route>
 
-                <Route path='account' element={
+                <Route path='account/*' element={
                     <ProtectedRouteNoLogin>
                         <Account />
                     </ProtectedRouteNoLogin>

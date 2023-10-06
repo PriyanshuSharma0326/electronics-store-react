@@ -79,6 +79,38 @@ const createUserDoc = async (user, formData, imageURL) => {
     return userDocRef;
 }
 
+// Method to Create Google User Doc to collections
+const createGoogleUserDoc = async (user) => {
+    if(!user) return;
+
+    const userDocRef = doc(db, 'users', user.uid);
+
+    const userSnapshot = await getDoc(userDocRef);
+
+    if(!userSnapshot.exists()) {
+        const { email, uid, displayName, photoURL } = user;
+
+        try {
+            await setDoc(userDocRef, {
+                uid,
+                displayName,
+                email,
+                photoURL,
+                address: '',
+                phoneNumber: '',
+                admin: false,
+                cart: [],
+                orders: [],
+            });
+        }
+        catch(err) {
+            console.log(err);
+        }
+    }
+
+    return userDocRef;
+}
+
 // Retrieve user doc
 const getUserDocFromCollection = async (userID) => {
     const userDocRef = doc(db, 'users', userID);
@@ -206,7 +238,7 @@ const updateProductInCollection = async (defaultProductInfo, productDoc, imageFi
                     })
                     await updateDoc(categoriesDocRef, {
                         products: arrayUnion({
-                            id: uuidv4(),
+                            id: id,
                             imageURL: downloadURL,
                             name: productName,
                             price: productPrice
@@ -231,7 +263,7 @@ const updateProductInCollection = async (defaultProductInfo, productDoc, imageFi
             })
             await updateDoc(categoriesDocRef, {
                 products: arrayUnion({
-                    id: uuidv4(),
+                    id: id,
                     imageURL: defaultProductImageURL,
                     name: productName,
                     price: productPrice
@@ -416,9 +448,6 @@ const addOrderedProductToCollection = async (orderInfo) => {
     const orderDocRef = doc(db, 'orders', orderInfo.orderID);
 
     const {
-        item,
-        orderDate,
-        paymentID,
         orderID,
         userID
     } = orderInfo;
@@ -431,15 +460,70 @@ const addOrderedProductToCollection = async (orderInfo) => {
         try {
             await setDoc(orderDocRef, orderInfo);
             await updateDoc(userOrdersRef, {
-                orders: arrayUnion({
-                    item,
-                    orderDate,
-                    paymentID,
+                orders: arrayUnion(
                     orderID,
-                })
+                )
             })
         }
         catch(err) {
+            console.log(err);
+        }
+    }
+}
+
+const updateOrderStatus = async (newStatus, orderID) => {
+    const orderDocRef = doc(db, 'orders', orderID);
+
+    try {
+        await updateDoc(orderDocRef, {
+            orderStatus: newStatus
+        })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+const updateUserProfile = async (profileDoc, imageFile, id) => {
+    const {
+        displayName,
+        phoneNumber,
+        photoURL,
+        address
+    } = profileDoc;
+
+    const userDocRef = doc(db, 'users', id);
+
+    const storageRef = ref(storage, uuidv4());
+
+    if(imageFile) {
+        await uploadBytesResumable(storageRef, imageFile)
+        .then(() => {
+            getDownloadURL(storageRef).then(async (downloadURL) => {
+                try {
+                    await updateDoc(userDocRef, {
+                        displayName,
+                        phoneNumber,
+                        photoURL: downloadURL,
+                        address,
+                    })
+                }
+                catch (err) {
+                    console.log(err);
+                }
+            });
+        });
+    }
+    else {
+        try {
+            await updateDoc(userDocRef, {
+                displayName,
+                phoneNumber,
+                photoURL,
+                address,
+            })
+        }
+        catch (err) {
             console.log(err);
         }
     }
@@ -450,6 +534,7 @@ export {
     getUserDocFromCollection,
     googlePopupSignIn,
     createUserDoc,
+    createGoogleUserDoc,
     createUserEmailPasswordMethod,
     signInUserEmailPasswordMethod,
     signOutUser,
@@ -465,5 +550,8 @@ export {
     deleteProductFromCart,
     clearUserCart,
 
-    addOrderedProductToCollection
+    addOrderedProductToCollection,
+    updateOrderStatus,
+
+    updateUserProfile,
 }

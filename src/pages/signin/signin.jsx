@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './signin.styles.scss';
-import { createUserDoc, googlePopupSignIn, signInUserEmailPasswordMethod } from '../../lib/utils/firebase.utils';
+import { createGoogleUserDoc, googlePopupSignIn, signInUserEmailPasswordMethod } from '../../lib/utils/firebase.utils';
 import { FormInput, Button } from '../../constants/index';
 import { useNavigate } from 'react-router-dom';
 import { validateEmail } from '../../lib/utils/utils';
@@ -83,7 +83,7 @@ function SignIn() {
             alert(error.message);
         });
 
-        await createUserDoc(user);
+        await createGoogleUserDoc(user);
     }
 
     return (

@@ -12,11 +12,12 @@ import { useNavigate } from 'react-router-dom';
 import { DashboardContext } from '../../context/dashboard-context';
 import ConfirmationBox from '../../components/confirmation-box/confirmation-box.component';
 import OrderInfoBarDashboard from '../../components/order-info-bar-dashboard/order-info-bar-dashboard';
+import { Error } from '../../constants';
 
 function Dashboard() {
     const navigate = useNavigate();
 
-    const { userList } = useContext(UserContext);
+    const { userList, userDoc } = useContext(UserContext);
 
     const { products, orders } = useContext(ShopContext);
 
@@ -27,101 +28,106 @@ function Dashboard() {
     }
 
     return (
-        <div className='dashboard-container'>
-            <h1 className="page-title">Dashboard</h1>
+        <>
+            {userDoc.admin ? 
+                <div className='dashboard-container'>
+                    <h1 className="page-title">Dashboard</h1>
 
-            <div className="dashboard-main">
-                <div className="dashboard-data">
-                    <div className="dashboard-title">
-                        <h1>{selectedStat}</h1>
+                    <div className="dashboard-main">
+                        <div className="dashboard-data">
+                            <div className="dashboard-title">
+                                <h1>{selectedStat}</h1>
 
-                        {selectedStat === 'Products' && <Button 
-                            type='button' 
-                            buttonText='Add Product' 
-                            onClick={goToAddProduct} 
-                        />}
+                                {selectedStat === 'Products' && <Button 
+                                    type='button' 
+                                    buttonText='Add Product' 
+                                    onClick={goToAddProduct} 
+                                />}
+                            </div>
+
+                            {selectedStat === 'Users' && <div className="users">
+                                {userList.map(user => {
+                                    return (
+                                        <UserInfoBar 
+                                            key={user.uid} 
+                                            user={user} 
+                                        />
+                                    )
+                                })}
+                            </div>}
+
+                            {selectedStat === 'Products' && <div className="products">
+                                {products.map(product => {
+                                    return (
+                                        <ProductBar 
+                                            key={product.id} 
+                                            product={product} 
+                                        />
+                                    )
+                                })}
+                            </div>}
+
+                            {selectedStat === 'Orders' && <div className="orders">
+                                {orders.map(order => {
+                                    return (
+                                        <OrderInfoBarDashboard 
+                                            key={order.orderID} 
+                                            orderInfo={order} 
+                                        />
+                                    )
+                                })}
+                            </div>}
+                        </div>
+
+                        <div className="stats">
+                            <h1 className="stats-section-title">Stats</h1>
+
+                            <div 
+                                className={`stat-box${selectedStat === 'Users' ? ' active' : ''}`} 
+                                onClick={() => setSelectedStat('Users')} 
+                            >
+                                <div className="icon">
+                                    <PeopleIcon />
+                                </div>
+                                <div className="stat-count">
+                                    <p>Users</p>
+                                    <span>{userList?.length}</span>
+                                </div>
+                            </div>
+
+                            <div 
+                                className={`stat-box${selectedStat === 'Products' ? ' active' : ''}`} 
+                                onClick={() => setSelectedStat('Products')} 
+                            >
+                                <div className="icon">
+                                    <InventoryIcon />
+                                </div>
+                                <div className="stat-count">
+                                    <p>Products</p>
+                                    <span>{products?.length}</span>
+                                </div>
+                            </div>
+
+                            <div 
+                                className={`stat-box${selectedStat === 'Orders' ? ' active' : ''}`} 
+                                onClick={() => setSelectedStat('Orders')} 
+                            >
+                                <div className="icon">
+                                    <SellIcon />
+                                </div>
+                                <div className="stat-count">
+                                    <p>Orders</p>
+                                    <span>{orders?.length}</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    {selectedStat === 'Users' && <div className="users">
-                        {userList.map(user => {
-                            return (
-                                <UserInfoBar 
-                                    key={user.uid} 
-                                    user={user} 
-                                />
-                            )
-                        })}
-                    </div>}
-
-                    {selectedStat === 'Products' && <div className="products">
-                        {products.map(product => {
-                            return (
-                                <ProductBar 
-                                    key={product.id} 
-                                    product={product} 
-                                />
-                            )
-                        })}
-                    </div>}
-
-                    {selectedStat === 'Orders' && <div className="orders">
-                        {orders.map(order => {
-                            return (
-                                <OrderInfoBarDashboard 
-                                    key={order.orderID} 
-                                    orderInfo={order} 
-                                />
-                            )
-                        })}
-                    </div>}
-                </div>
-
-                <div className="stats">
-                    <h1 className="stats-section-title">Stats</h1>
-
-                    <div 
-                        className={`stat-box${selectedStat === 'Users' ? ' active' : ''}`} 
-                        onClick={() => setSelectedStat('Users')} 
-                    >
-                        <div className="icon">
-                            <PeopleIcon />
-                        </div>
-                        <div className="stat-count">
-                            <p>Users</p>
-                            <span>{userList?.length}</span>
-                        </div>
-                    </div>
-
-                    <div 
-                        className={`stat-box${selectedStat === 'Products' ? ' active' : ''}`} 
-                        onClick={() => setSelectedStat('Products')} 
-                    >
-                        <div className="icon">
-                            <InventoryIcon />
-                        </div>
-                        <div className="stat-count">
-                            <p>Products</p>
-                            <span>{products?.length}</span>
-                        </div>
-                    </div>
-
-                    <div 
-                        className={`stat-box${selectedStat === 'Orders' ? ' active' : ''}`} 
-                        onClick={() => setSelectedStat('Orders')} 
-                    >
-                        <div className="icon">
-                            <SellIcon />
-                        </div>
-                        <div className="stat-count">
-                            <p>Orders</p>
-                            <span>{orders?.length}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {isBoxOpen &&  <ConfirmationBox />}
-        </div>
+                    {isBoxOpen &&  <ConfirmationBox />}
+                </div> : 
+                <Error />
+            }
+        </>
     )
 }
 

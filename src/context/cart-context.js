@@ -38,7 +38,7 @@ export const CartContextProvider = ({ children }) => {
 
             const unsub = onSnapshot(userCartDocRef, (doc) => {
                 if(doc) {
-                    setCart(doc.data().cart);
+                    setCart(doc.data()?.cart);
                 }
             });
 
