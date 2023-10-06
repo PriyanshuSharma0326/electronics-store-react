@@ -3,7 +3,7 @@ import './contact.styles.scss';
 
 function Contacts() {
     return (
-        <div>Contacts</div>
+        <div className='contact-section'>Contacts</div>
     )
 }
 

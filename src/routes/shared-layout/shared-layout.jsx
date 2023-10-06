@@ -1,17 +1,24 @@
 import React from 'react';
 import './shared-layout.scss';
 import { Navbar } from '../../constants/index';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
+import Footer from '../../components/footer/footer.component';
 
 function SharedLayout() {
+    const location = useLocation();
+
+    const excludedPaths = ['/cart', '/contact'];
+
+    const isFooterExcluded = excludedPaths.includes(location.pathname);
+
     return (
-        <div>
+        <>
             <Navbar/>
 
             <Outlet />
 
-            {/* Footer */}
-        </div>
+            {!isFooterExcluded && <Footer />}
+        </>
     )
 }
 

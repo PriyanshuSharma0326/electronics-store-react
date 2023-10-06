@@ -1,0 +1,174 @@
+.footer {
+    padding: 3.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    background-color: var(--dark);
+    color: var(--white);
+
+    .social-links-container {
+        display: flex;
+        gap: 0.25rem;
+
+        .social-link {
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        
+            background-color: #444;
+        
+            transition: all 0.25s ease-in-out;
+
+            .fa-social {
+                font-size: 1.4rem;
+                color: var(--white);
+            
+                transition: all 0.25s ease-in-out;
+
+                @media (max-width: 1024px) {
+                    font-size: 1.25rem;
+                }
+
+                @media (max-width: 768px) {
+                    font-size: 1.5rem;
+                }
+            }
+
+            &:hover {
+                transform: scale(1.1);
+                cursor: pointer;
+            }
+
+            @media (max-width: 1024px) {
+                width: 2.8rem;
+                height: 2.8rem;
+            }
+
+            @media (max-width: 768px) {
+                width: 3.25rem;
+                height: 3.25rem;
+            }
+        }
+
+        .fa-facebook {
+            &:hover {
+                background-color: var(--facebook);
+            }
+        }
+
+        .fa-twitter {
+            &:hover {
+                background-color: var(--twitter);
+            }
+        }
+
+        .fa-instagram {
+            &:hover {
+                background-color: var(--instagram);
+            }
+        }
+
+        .fa-github {
+            &:hover {
+                background-color: var(--github);
+            }
+        }
+
+        .fa-linkedin {
+            &:hover {
+                background-color: var(--linkedin);
+            }
+        }
+    }
+
+    .footer-icon-container {
+        position: fixed;
+        right: 3rem;
+        bottom: 3rem;
+        width: 3.5rem;
+        height: 3.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    
+        background-color: var(--dark);
+        cursor: pointer;
+
+        .fa-rocket {
+            font-size: 1.5rem;
+            color: var(--white);
+            transform: rotate(-45deg);
+        
+            transition: all 0.25s ease-in-out;
+
+            @media (max-width: 1024px) {
+                font-size: 1.3rem;
+            }
+
+            @media (max-width: 768px) {
+                font-size: 2rem;
+            }
+
+            @media (max-width: 426px) {
+                font-size: 1.35rem;
+            }
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            width: 5.25rem;
+            background-color: #000;
+            color: var(--light-grey);
+            text-align: center;
+            padding: 0.25rem;
+            position: absolute;
+            font-size: 0.65rem;
+            z-index: 1;
+            bottom: -1.75rem;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            display: none;
+        
+            transition: all 0.3s ease-out;
+        }
+
+        @media (max-width: 1024px) {
+            right: 3rem;
+            bottom: 3rem;
+            width: 3rem;
+            height: 3rem;
+        }
+
+        @media (max-width: 426px) {
+            right: 2.5rem;
+            bottom: 2.5rem;
+            width: 3.25rem;
+            height: 3.25rem;
+        }
+
+        &:hover .tooltip-text {
+            @media (min-width:700px) {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    }
+
+    .footer-credits {
+        @media (max-width: 1024px) {
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 1.25rem;
+        }
+    }
+}

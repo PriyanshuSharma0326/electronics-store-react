@@ -28,6 +28,15 @@ $grey: #6B728E;
     --green-3: #97DBAE;
     --green-4: #1F8A70;
     --red: #ce1225;
+
+    --bright-black: #222;
+    --light-grey: #EAEAEA;
+
+    --facebook: #4267B2;
+    --twitter: #1DA1F2;
+    --instagram: #405DE6;
+    --github: #4078c0;
+    --linkedin: #0077b5;
 }
 
 html {
@@ -38,7 +47,7 @@ body {
     font-family: 'Jost', sans-serif;
     
     max-width: 100vw;
-    height: 100vh;
+    max-height: 100vh;
 }
 
 body::-webkit-scrollbar {
