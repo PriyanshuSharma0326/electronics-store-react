@@ -28,32 +28,46 @@ $grey: #6B728E;
 
             .image-input-group{
                 display: flex;
-                align-items: center;
-        
-                label {
-                    padding: 10px;
+                flex-direction: column;
+                position: relative;
+
+                .image-input-container {
                     display: flex;
                     align-items: center;
-                    cursor: pointer;
-        
-                    .MuiSvgIcon-root {
-                        color: var(--green-1);
+            
+                    label {
+                        padding: 10px;
+                        display: flex;
+                        align-items: center;
+                        cursor: pointer;
+            
+                        .MuiSvgIcon-root {
+                            color: var(--green-1);
+                        }
+            
+                        > span {
+                            margin-left: 1rem;
+                            font-size: 1rem;
+                            font-weight: 500;
+                            color: #6B728E;
+                        }
                     }
-        
+            
+                    .image-input {
+                        display: none;
+                    }
+            
                     > span {
-                        margin-left: 1rem;
-                        font-size: 1rem;
-                        font-weight: 500;
-                        color: #6B728E;
+                        margin-left: 0.8rem;
+                        font-size: 0.85rem;
+                        color: var(--red);
                     }
                 }
-        
-                .image-input {
-                    display: none;
-                }
-        
-                > span {
-                    margin-left: 1rem;
+
+                .error {
+                    position: absolute;
+                    left: 5px;
+                    bottom: -1.5rem;
                     font-size: 0.85rem;
                     color: var(--red);
                 }
@@ -62,7 +76,7 @@ $grey: #6B728E;
 
         button {
             margin: 0 auto;
-            margin-top: 2.5rem;
+            margin-top: 3rem;
             height: fit-content;
             width: 50%;
         }

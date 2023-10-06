@@ -97,6 +97,13 @@ function SignUp() {
             validationErrors.address = 'Special characters not allowed';
         }
 
+        if(!image) {
+            validationErrors.image = '*Please select a profile image';
+        }
+        else if(image && image.size > 1000000) {
+            validationErrors.image = '*Please select a file less than 1MB';
+        }
+
         if(Object.keys(validationErrors).length > 0) {
             setFormErrors(validationErrors);
             return;
@@ -210,17 +217,20 @@ function SignUp() {
                     />
 
                     <div className="image-input-group">
-                        <label htmlFor='image'>
-                            <AddPhotoAlternateTwoToneIcon />
-                            <span>Add an image</span>
-                        </label>
-                        <input 
-                            className='image-input' 
-                            type='file' 
-                            id='image' 
-                            name='image'
-                        />
-                        <span>*Max size: 1MB</span>
+                        <div className="image-input-container">
+                            <label htmlFor='image'>
+                                <AddPhotoAlternateTwoToneIcon />
+                                <span>Add an image</span>
+                            </label>
+                            <input 
+                                className='image-input' 
+                                type='file' 
+                                id='image' 
+                                name='image'
+                            />
+                            <span>*Max size: 1MB</span>
+                        </div>
+                        <span className="error">{formErrors.image}</span>
                     </div>
                 </form>
 
