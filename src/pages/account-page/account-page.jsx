@@ -86,10 +86,6 @@ function AccountPage() {
                     </div>
                 </div>
 
-                {(!userDoc.address || !userDoc.phoneNumber) && <div className="warning">
-                    <h1>Update Profile to continue shopping!</h1>
-                </div>}
-
                 <div className="buttons-container">
                     {userDoc?.admin && <Button 
                         type='button' 

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './cart.styles.scss';
 import { CartContext } from '../../context/cart-context';
 import { CartItem, Button } from '../../constants/index';
@@ -24,6 +24,8 @@ function Cart() {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
     });
+
+    const [profileError, setProfileError] = useState('');
 
     const buyProducts = () => {
         var options = {
@@ -88,7 +90,13 @@ function Cart() {
         };
 
         var pay = new window.Razorpay(options);
-        pay.open();
+        if(!userDoc.address || !userDoc.phoneNumber) {
+            setProfileError('Update Profile to continue shopping!');
+        }
+        else {
+            pay.open();
+            setProfileError('');
+        }
     }
 
     return (
@@ -120,13 +128,19 @@ function Cart() {
             </div>
 
             <div className="subtotal-container">
-                <h2>Subtotal &#40;{userCart.reduce((prev, curr) => prev + Number(curr.quantity), 0)} item{userCart.length > 1 ? 's' : ''}&#41;: <span>${total_localised}</span></h2>
+                <div className="subtotal-info">
+                    <h2>Subtotal &#40;{userCart.reduce((prev, curr) => prev + Number(curr.quantity), 0)} item{userCart.length > 1 ? 's' : ''}&#41;: <span>${total_localised}</span></h2>
 
-                <Button 
-                    buttonText='Proceed to buy' 
-                    type='button' 
-                    onClick={buyProducts} 
-                />
+                    <Button 
+                        buttonText='Proceed to buy' 
+                        type='button' 
+                        onClick={buyProducts} 
+                    />
+                </div>
+
+                {profileError && <div className="warning">
+                    <h1>{profileError}</h1>
+                </div>}
             </div>
         </div>
     );
