@@ -444,6 +444,7 @@ const clearUserCart = async (userID) => {
     }
 }
 
+// Add product to orders collection
 const addOrderedProductToCollection = async (orderInfo) => {
     const orderDocRef = doc(db, 'orders', orderInfo.orderID);
 
@@ -471,6 +472,7 @@ const addOrderedProductToCollection = async (orderInfo) => {
     }
 }
 
+// Function to update order status with the provided status
 const updateOrderStatus = async (newStatus, orderID) => {
     const orderDocRef = doc(db, 'orders', orderID);
 
@@ -484,6 +486,7 @@ const updateOrderStatus = async (newStatus, orderID) => {
     }
 }
 
+// Fucntion to update user profile
 const updateUserProfile = async (profileDoc, imageFile, id) => {
     const {
         displayName,

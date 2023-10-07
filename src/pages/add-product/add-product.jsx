@@ -78,7 +78,7 @@ function AddProduct() {
                 await addProductToCollection({ ...formInputs, image});
             }
             catch(err) {
-                console.log(err);
+                alert("Can't add product to collection!");
             }
         }
 

@@ -78,7 +78,7 @@ function UpdateProfile() {
                 await updateUserProfile(formInputs, image, userDoc.uid);
             }
             catch(err) {
-                console.log(err);
+                alert("Can't update user profile!");
             }
         }
 
@@ -96,7 +96,7 @@ function UpdateProfile() {
             });
         }
         catch(err) {
-            console.log(err);
+            alert('Error updating form!');
         }
     }, [])
 

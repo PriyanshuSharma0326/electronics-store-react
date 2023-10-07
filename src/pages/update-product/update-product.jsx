@@ -109,7 +109,7 @@ function UpdateProduct() {
                 await updateProductInCollection(defaultProductInfo, formInputs, image, param.productID);
             }
             catch(err) {
-                console.log(err);
+                alert("Can't update product information!");
             }
         }
 

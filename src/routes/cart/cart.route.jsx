@@ -78,7 +78,7 @@ function Cart() {
                     navigate('/account');
                 }
                 catch (err) {
-                    console.log(err);
+                    alert('Payment error!');
                 }
             },
 
