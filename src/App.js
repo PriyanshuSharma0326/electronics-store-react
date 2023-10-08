@@ -15,6 +15,7 @@ import {
 
 import { UserContext } from "./context/user-context";
 import DashboardRoute from './routes/dashboard/dashboard.route';
+import ProductsRoute from "./routes/products/products.route";
 
 function App() {
     const { currentUser } = useContext(UserContext);
@@ -41,6 +42,8 @@ function App() {
                 <Route index element={<Root />} />
 
                 <Route path='shop/*' element={<Shop />} />
+
+                <Route path='products/*' element={<ProductsRoute />} />
 
                 <Route path='contact' element={<Contact />} />
 

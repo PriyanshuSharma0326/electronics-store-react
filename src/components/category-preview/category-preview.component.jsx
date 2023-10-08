@@ -19,15 +19,15 @@ function CategoryPreview({ title, products }) {
 
             <div className='category-preview-products'>
                 {products?.slice(0, 4)
-                .map((product) => {
-                    return (
-                        <ProductCard 
-                            key={product.id} 
-                            product={product} 
-                        />
-                    );
-                })
-            }
+                    .map((product) => {
+                        return (
+                            <ProductCard 
+                                key={product.id} 
+                                product={product} 
+                            />
+                        );
+                    })
+                }
             </div>
         </div>
     );
