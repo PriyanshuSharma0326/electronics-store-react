@@ -11,7 +11,6 @@ import FormInput from '../components/form-input/form-input.component';
 import SignIn from '../pages/signin/signin';
 import SignUp from '../pages/signup/signup';
 
-import Contact from '../routes/contact/contact.route';
 import Error from '../routes/error/error.route';
 import Root from '../routes/root/root.route';
 import SharedLayout from '../routes/shared-layout/shared-layout';
@@ -33,7 +32,6 @@ export {
     CategoryPreview,
     ShopCategories,
 
-    Contact,
     Error,
     Root,
     SharedLayout,

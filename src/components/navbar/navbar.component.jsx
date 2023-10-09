@@ -33,19 +33,10 @@ function Navbar() {
             <ul className="nav-links-container">
                 <li>
                     <Link 
-                        to='/shop' 
+                        to='/products' 
                         className='nav-link' 
                     >
-                    Shop
-                    </Link>
-                </li>
-
-                <li>
-                    <Link 
-                        to='/contact' 
-                        className='nav-link' 
-                    >
-                    Contact
+                    Products
                     </Link>
                 </li>
 

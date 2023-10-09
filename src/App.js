@@ -3,7 +3,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { 
     Account,
     AuthPage,
-    Contact,
     Error,
     Root,
     SharedLayout,
@@ -44,8 +43,6 @@ function App() {
                 <Route path='shop/*' element={<Shop />} />
 
                 <Route path='products/*' element={<ProductsRoute />} />
-
-                <Route path='contact' element={<Contact />} />
 
                 <Route path='accounts' element={
                     <ProtectedRouteOnLogin>
