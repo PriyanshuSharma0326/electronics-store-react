@@ -3,7 +3,7 @@ import { createContext, useRef, useState } from "react";
 export const NavbarContext = createContext();
 
 export const NavbarContextProvider = ({ children }) => {
-    const [menu, setMenu] = useState(true);
+    const [menu, setMenu] = useState(false);
     const wrapperRef = useRef(null);
 
     const contextValue = {
