@@ -3,10 +3,81 @@ import './footer.style.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faGithub, faInstagram, faLinkedinIn, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import { Link } from 'react-router-dom';
 
 function Footer() {
     return (
         <div className='footer'>
+            <div className="footer-useful-links">
+                <h1 className="section-title">Useful Links</h1>
+                <ul className="links-container">
+                    <li>
+                        <Link 
+                            to='/products' 
+                            className='link' 
+                        >
+                        Shop Products
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to='/shop' 
+                            className='link' 
+                        >
+                        Explore categories
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to='/account' 
+                            className='link' 
+                        >
+                        Your Account
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to='/cart' 
+                            className='link' 
+                        >
+                        Your Cart
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to='shop/mobiles-&-tablets' 
+                            className='link' 
+                        >
+                        Mobiles & Tablets
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to='shop/televisions' 
+                            className='link' 
+                        >
+                        Televisions
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to='shop/laptops' 
+                            className='link' 
+                        >
+                        Laptops
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to='shop/accessories' 
+                            className='link' 
+                        >
+                        Accessories
+                        </Link>
+                    </li>
+                </ul>
+            </div>
+
             <div className="social-links-container">
                 <a href="https://www.facebook.com/xtechilad" className="social-link fa-facebook" target='_blank' rel='noreferrer'>
                     <FontAwesomeIcon className='fa-social' icon={faFacebookF} />

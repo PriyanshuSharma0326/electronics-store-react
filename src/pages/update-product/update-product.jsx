@@ -20,6 +20,7 @@ function UpdateProduct() {
         productName: '',
         productPrice: '',
         productImageURL: '',
+        productDescription: '',
         category: ''
     });
 
@@ -27,6 +28,7 @@ function UpdateProduct() {
         defaultProductName: '',
         defaultProductPrice: '',
         defaultProductImageURL: '',
+        defaultProductDescription: ''
     });
 
     const { shop } = useContext(ShopContext);
@@ -43,12 +45,14 @@ function UpdateProduct() {
                             productName: product.name,
                             productPrice: product.price,
                             productImageURL: product.imageURL,
-                            category: shop[category]?.title
+                            productDescription: product.desc,
+                            category: shop[category]?.title,
                         });
                         setDefaultProductInfo({
                             defaultProductName: product.name,
                             defaultProductPrice: product.price,
                             defaultProductImageURL: product.imageURL,
+                            defaultProductDescription: product.desc,
                         });
                         break;
                     }
@@ -68,6 +72,7 @@ function UpdateProduct() {
     const defaultFormErrors = {
         productName: '',
         productPrice: '',
+        productDescription: '',
         image: ''
     };
 
@@ -81,7 +86,7 @@ function UpdateProduct() {
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        const image = e.target[2].files[0];
+        const image = e.target[3].files[0];
 
         const validationErrors = {};
 
@@ -91,6 +96,10 @@ function UpdateProduct() {
 
         if(!formInputs.productPrice.trim()) {
             validationErrors.productPrice = 'Product price is required';
+        }
+
+        if(!formInputs.productDescription.trim()) {
+            validationErrors.productDescription = 'Product description is required';
         }
 
         if(image && image.size > 1000000) {
@@ -148,6 +157,18 @@ function UpdateProduct() {
                             name: 'productPrice',
                             onChange: changeHandler,
                             value: formInputs.productPrice
+                        }}
+                    />
+
+                    <FormInput 
+                        labelText='Product Description' 
+                        errorText={formErrors.productDescription} 
+                        inputOptions={{
+                            type: 'text',
+                            id: 'productDescription',
+                            name: 'productDescription',
+                            onChange: changeHandler,
+                            value: formInputs.productDescription
                         }}
                     />
 

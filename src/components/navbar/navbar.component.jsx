@@ -69,6 +69,15 @@ function Navbar() {
                 </li>}
 
                 <li>
+                    <Link 
+                        to='/cart' 
+                        className='nav-link' 
+                    >
+                    Cart
+                    </Link>
+                </li>
+
+                <li>
                     <div className="cart-icon-container" onClick={cartButtonHandler}>
                         <FontAwesomeIcon className='icon' icon={faCartShopping} />
                         <span>{userCart?.reduce((prev, curr) => prev + Number(curr.quantity), 0)}</span>

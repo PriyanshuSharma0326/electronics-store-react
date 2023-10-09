@@ -179,7 +179,13 @@ const authStateChangeListener = (callback) => {
 
 // Admin Function - Add product to collection
 const addProductToCollection = async (productDoc) => {
-    const { productName, productPrice, category, image } = productDoc;
+    const {
+        productName,
+        productPrice,
+        productDescription,
+        category,
+        image
+    } = productDoc;
 
     const categoriesDocRef = doc(db, 'categories', category);
 
@@ -194,7 +200,8 @@ const addProductToCollection = async (productDoc) => {
                         id: uuidv4(),
                         imageURL: downloadURL,
                         name: productName,
-                        price: productPrice
+                        price: productPrice,
+                        desc: productDescription,
                     })
                 })
             }
@@ -210,6 +217,7 @@ const updateProductInCollection = async (defaultProductInfo, productDoc, imageFi
     const {
         productName,
         productPrice,
+        productDescription,
         category
     } = productDoc;
 
@@ -217,6 +225,7 @@ const updateProductInCollection = async (defaultProductInfo, productDoc, imageFi
         defaultProductName,
         defaultProductPrice,
         defaultProductImageURL,
+        defaultProductDescription,
     } = defaultProductInfo;
 
     const categoriesDocRef = doc(db, 'categories', category);
@@ -233,7 +242,8 @@ const updateProductInCollection = async (defaultProductInfo, productDoc, imageFi
                             id: id,
                             imageURL: defaultProductImageURL,
                             name: defaultProductName,
-                            price: defaultProductPrice
+                            price: defaultProductPrice,
+                            desc: defaultProductDescription
                         })
                     })
                     await updateDoc(categoriesDocRef, {
@@ -241,7 +251,8 @@ const updateProductInCollection = async (defaultProductInfo, productDoc, imageFi
                             id: id,
                             imageURL: downloadURL,
                             name: productName,
-                            price: productPrice
+                            price: productPrice,
+                            desc: productDescription
                         })
                     })
                 }
@@ -258,7 +269,8 @@ const updateProductInCollection = async (defaultProductInfo, productDoc, imageFi
                     id: id,
                     imageURL: defaultProductImageURL,
                     name: defaultProductName,
-                    price: defaultProductPrice
+                    price: defaultProductPrice,
+                    desc: defaultProductDescription
                 })
             })
             await updateDoc(categoriesDocRef, {
@@ -266,7 +278,8 @@ const updateProductInCollection = async (defaultProductInfo, productDoc, imageFi
                     id: id,
                     imageURL: defaultProductImageURL,
                     name: productName,
-                    price: productPrice
+                    price: productPrice,
+                    desc: productDescription
                 })
             })
         }
@@ -283,6 +296,7 @@ const deleteProductFromCollection = async (productDoc) => {
         productName,
         productPrice,
         productImageURL,
+        productDescription,
         category
     } = productDoc;
 
@@ -294,7 +308,8 @@ const deleteProductFromCollection = async (productDoc) => {
                 id: productID,
                 imageURL: productImageURL,
                 name: productName,
-                price: productPrice
+                price: productPrice,
+                desc: productDescription
             })
         })
     }

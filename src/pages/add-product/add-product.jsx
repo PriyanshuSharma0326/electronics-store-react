@@ -16,12 +16,14 @@ function AddProduct() {
     const defaultFormFields = {
         productName: '',
         productPrice: '',
+        productDescription: '',
         category: ''
     };
 
     const defaultFormErrors = {
         productName: '',
         productPrice: '',
+        productDescription: '',
         category: '',
         image: ''
     };
@@ -43,7 +45,7 @@ function AddProduct() {
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        const image = e.target[2].files[0];
+        const image = e.target[3].files[0];
 
         const validationErrors = {};
 
@@ -53,6 +55,10 @@ function AddProduct() {
 
         if(!formInputs.productPrice.trim()) {
             validationErrors.productPrice = 'Product price is required';
+        }
+
+        if(!formInputs.productDescription.trim()) {
+            validationErrors.productDescription = 'Product description is required';
         }
 
         if(!formInputs.category.trim()) {
@@ -113,6 +119,18 @@ function AddProduct() {
                             name: 'productPrice',
                             onChange: changeHandler,
                             value: formInputs.productPrice
+                        }}
+                    />
+
+                    <FormInput 
+                        labelText='Product Description' 
+                        errorText={formErrors.productDescription} 
+                        inputOptions={{
+                            type: 'text',
+                            id: 'productDescription',
+                            name: 'productDescription',
+                            onChange: changeHandler,
+                            value: formInputs.productDescription
                         }}
                     />
 

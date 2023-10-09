@@ -30,6 +30,7 @@ function ProductBar({ product }) {
                             productName: item.name,
                             productPrice: item.price,
                             productImageURL: item.imageURL,
+                            productDescription: item.desc,
                             category: shop[category]?.title
                         });
                         break;
