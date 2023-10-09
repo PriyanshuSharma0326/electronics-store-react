@@ -61,6 +61,17 @@
         }
     }
 
+    .more-icon-container {
+        display: none;
+        cursor: pointer;
+
+        .icon {
+            display: block;
+            font-size: 1.85rem;
+            color: white;
+        }
+    }
+
     @media (max-width: 1024px) {
         padding: 1rem 5rem;
     }
@@ -79,11 +90,11 @@
         .nav-links-container {
             li {
                 display: none;
-
-                &:last-of-type {
-                    display: flex;
-                }
             }
+        }
+
+        .more-icon-container {
+            display: flex;
         }
     }
 }

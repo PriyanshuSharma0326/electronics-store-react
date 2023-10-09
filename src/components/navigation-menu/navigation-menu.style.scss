@@ -1,0 +1,35 @@
+.nav-menu {
+    position: fixed;
+    top: 5rem;
+    left: 0;
+    z-index: 20;
+    width: 100%;
+    color: white;
+    transition-timing-function: ease-in;
+    transition: display 0.5s;
+    display: none;
+
+    .nav-menu-links {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+
+        .nav-menu-link {
+            text-decoration: none;
+            text-align: center;
+            padding: 1rem 1.75rem;
+            background-color: var(--dark);
+            color: var(--white);
+            border-block-end: 1px solid var(--white);
+
+            &:first-child {
+                border-block-start: 1px solid var(--white);
+            }
+        }
+    }
+
+    @media (max-width: 426px) {
+        display: flex;
+    }
+}
