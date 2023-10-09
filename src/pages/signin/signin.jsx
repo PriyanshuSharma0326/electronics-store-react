@@ -86,6 +86,13 @@ function SignIn() {
         await createGoogleUserDoc(user);
     }
 
+    const fillWithSampleCredentials = (email, pass) => {
+        setFormInputs({
+            email: email,
+            password: pass,
+        })
+    }
+
     return (
         <div className='sign-in-container'>
             <div className='sign-in-form-container'>
@@ -146,6 +153,66 @@ function SignIn() {
                     <span onClick={handleClick}> Sign Up</span>
                 </h2>
             </div>
+
+            <table className="credentials">
+                <thead
+                onClick={() => fillWithSampleCredentials('ps940016@gmail.com', '123456')} 
+                >
+                    <tr>
+                        <th>Admin credentials</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Email</td>
+                        <td>ps940016@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>123456</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table className="credentials">
+                <thead
+                onClick={() => fillWithSampleCredentials('davidwarner@cricket.com.au', '123456')} 
+                >
+                    <tr>
+                        <th>User-1 credentials</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Email</td>
+                        <td>davidwarner@cricket.com.au</td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>123456</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table className="credentials">
+                <thead
+                onClick={() => fillWithSampleCredentials('shrutish539@email.com', '123456')} 
+                >
+                    <tr>
+                        <th>User-2 credentials</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Email</td>
+                        <td>shrutish539@email.com</td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>123456</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     );
 }
