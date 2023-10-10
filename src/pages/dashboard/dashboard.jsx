@@ -68,7 +68,7 @@ function Dashboard() {
                             </div>}
 
                             {selectedStat === 'Orders' && <div className="orders">
-                                {orders.map(order => {
+                                {orders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate)).map(order => {
                                     return (
                                         <OrderInfoBarDashboard 
                                             key={order.orderID} 

@@ -103,7 +103,7 @@ function AccountPage() {
 
             <div className="user-orders">
                 {userOrders.length !== 0 && <h1>Orders</h1>}
-                {userOrders?.map(order => {
+                {userOrders?.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate)).map(order => {
                     return (
                         <OrderInfoBarAccountPage 
                             key={order.orderID} 
