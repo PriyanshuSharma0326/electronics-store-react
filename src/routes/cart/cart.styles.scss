@@ -12,6 +12,7 @@ $grey: #6B728E;
         width: 70%;
         border: 1px solid $grey;
         padding: 1rem;
+        height: fit-content;
 
         display: flex;
         flex-direction: column;
@@ -74,6 +75,50 @@ $grey: #6B728E;
                 text-align: center;
                 font-size: 0.95rem;
                 color: var(--red);
+            }
+        }
+
+        .card-details {
+            width: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            border: 1px solid $grey;
+            padding: 1.5rem;
+
+            .card-number {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+
+                h1 {
+                    font-size: 1.25rem;
+                }
+
+                .number {
+                    display: flex;
+                    gap: 1rem;
+                    span {
+                        font-size: 1.15rem;
+                        letter-spacing: 0.25rem;
+                    }
+                }
+            }
+
+            .card-secret {
+                display: flex;
+                flex-direction: column;
+                gap: 0.65rem;
+                
+                .expiry, .cvv, .otp {
+                    h2 {
+                        font-size: 1.1rem;
+                    }
+
+                    span {
+                        font-size: 1rem;
+                    }
+                }
             }
         }
     }

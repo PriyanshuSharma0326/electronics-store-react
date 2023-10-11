@@ -25,7 +25,7 @@ function Cart() {
         maximumFractionDigits: 2,
     });
 
-    const [profileError, setProfileError] = useState('');
+    const [error, setError] = useState('');
 
     const buyProducts = () => {
         var options = {
@@ -37,6 +37,12 @@ function Cart() {
             description: "to facilitate dummy payments",
             image: 'https://purepng.com/public/uploads/large/google-stadia-logo-3cx.png',
             order_receipt: uuidv4(),
+            prefill: {
+                contact: `+91${userDoc.phoneNumber}` 
+            },
+            theme: {
+                color: "#3399cc",
+            },
 
             handler: function (response) {
                 const paymentID = response.razorpay_payment_id;
@@ -83,19 +89,18 @@ function Cart() {
                     alert('Payment error!');
                 }
             },
-
-            theme: {
-                color: "#3399cc",
-            },
         };
 
         var pay = new window.Razorpay(options);
         if(!userDoc.address || !userDoc.phoneNumber) {
-            setProfileError('Update Profile to continue shopping!');
+            setError('Update Profile to continue shopping!');
+        }
+        else if(!userCart.length) {
+            setError('No item(s) in cart!');
         }
         else {
             pay.open();
-            setProfileError('');
+            setError('');
         }
     }
 
@@ -138,9 +143,40 @@ function Cart() {
                     />
                 </div>
 
-                {profileError && <div className="warning">
-                    <h1>{profileError}</h1>
+                {error && <div className="warning">
+                    <h1>{error}</h1>
                 </div>}
+
+                {currentUser && 
+                    <div className="card-details">
+                        <div className="card-number">
+                            <h1>Card Number</h1>
+                            <div className='number'>
+                                <span>4111</span>
+                                <span>1111</span>
+                                <span>1111</span>
+                                <span>1111</span>
+                            </div>
+                        </div>
+
+                        <div className="card-secret">
+                            <div className="expiry">
+                                <h2>Expiry Date</h2>
+                                <span>12/29</span>
+                            </div>
+                            
+                            <div className="cvv">
+                                <h2>CVV</h2>
+                                <span>433</span>
+                            </div>
+
+                            <div className="otp">
+                                <h2>OTP</h2>
+                                <span>*Enter any OTP when asked</span>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     );
