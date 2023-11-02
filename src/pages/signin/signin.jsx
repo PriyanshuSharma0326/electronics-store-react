@@ -213,6 +213,26 @@ function SignIn() {
                     </tr>
                 </tbody>
             </table>
+
+            <table className="credentials">
+                <thead
+                onClick={() => fillWithSampleCredentials('shreyasiyer@bcci.co.in', '123456')} 
+                >
+                    <tr>
+                        <th>User-3 credentials</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Email</td>
+                        <td>shreyasiyer@bcci.co.in</td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>123456</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     );
 }
