@@ -80,6 +80,6 @@ To run this application locally, follow these steps:
 
 ## Usage
 
-Once the development server is up and running, open your web browser and go to `http://localhost:3000` to see the portfolio in action. Feel free to explore the different sections, projects, and information provided.
+Once the development server is up and running, open your web browser and go to `http://localhost:3000` to see the project in action.
 
-Thank you for visiting my portfolio!
+Thank you for visiting my project!
