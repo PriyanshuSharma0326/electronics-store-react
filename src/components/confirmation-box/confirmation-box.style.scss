@@ -43,4 +43,16 @@
             }
         }
     }
+
+    @media (max-width: 768px) {
+        .confirmation-box {
+            width: 55%;
+        }
+    }
+
+    @media (max-width: 426px) {
+        .confirmation-box {
+            width: 85%;
+        }
+    }
 }
