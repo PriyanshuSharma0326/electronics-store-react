@@ -3,9 +3,13 @@ import './footer.style.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faGithub, faInstagram, faLinkedinIn, faXTwitter } from '@fortawesome/free-brands-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function Footer() {
+    const location = useLocation();
+
+    const isShopRoute = location.pathname.includes('shop');
+    
     return (
         <div className='footer'>
             <div className="footer-useful-links">
@@ -45,7 +49,7 @@ function Footer() {
                     </li>
                     <li>
                         <Link 
-                            to='shop/mobiles-&-tablets' 
+                            to={isShopRoute ? 'mobiles-&-tablets' : 'shop/mobiles-&-tablets'} 
                             className='link' 
                         >
                         Mobiles & Tablets
@@ -53,7 +57,7 @@ function Footer() {
                     </li>
                     <li>
                         <Link 
-                            to='shop/televisions' 
+                            to={isShopRoute ? 'televisions' : 'shop/televisions'} 
                             className='link' 
                         >
                         Televisions
@@ -61,7 +65,7 @@ function Footer() {
                     </li>
                     <li>
                         <Link 
-                            to='shop/laptops' 
+                            to={isShopRoute ? 'laptops' : 'shop/laptops'} 
                             className='link' 
                         >
                         Laptops
@@ -69,7 +73,7 @@ function Footer() {
                     </li>
                     <li>
                         <Link 
-                            to='shop/accessories' 
+                            to={isShopRoute ? 'accessories' : '/shop/accessories'} 
                             className='link' 
                         >
                         Accessories
