@@ -5,7 +5,7 @@ $grey: #6B728E;
     flex-direction: column;
     gap: 1rem;
     width: 22rem;
-    margin-top: 30.5rem;
+    margin-top: 34.5rem;
     padding-bottom: 4rem;
 
     .sign-in-form-container {
@@ -131,7 +131,11 @@ $grey: #6B728E;
     }
 
     @media (max-width: 1440px) {
-        margin-top: 20.5rem;
+        margin-top: 24.5rem;
+    }
+
+    @media (max-width: 1367px) {
+        margin-top: 30.5rem;
     }
 
     @media (max-width: 1024px) {
@@ -141,7 +145,7 @@ $grey: #6B728E;
 
     @media (max-width: 768px) {
         width: 22rem;
-        margin-top: 13.5rem;
+        margin-top: 14rem;
     }
 
     @media (max-width: 426px) {
