@@ -68,6 +68,12 @@ function SignIn() {
                     setFormErrors(validationErrors);
                     return;
                 }
+                if(err.code === 'auth/invalid-credential') {
+                    validationErrors.email = 'Invalid Credential';
+                    validationErrors.password = 'Invalid Credential';
+                    setFormErrors(validationErrors);
+                    return;
+                }
                 else if(err.code === 'auth/wrong-password') {
                     validationErrors.password = 'Incorrect password';
                     setFormErrors(validationErrors);
