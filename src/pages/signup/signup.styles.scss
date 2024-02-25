@@ -1,17 +1,15 @@
-$grey: #6B728E;
-
 .sign-up-container {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     width: 48rem;
-    margin-top: 11.5rem;
+    margin-top: 7rem;
     padding-bottom: 4rem;
 
     .sign-up-form-container {
         display: flex;
         flex-direction: column;
-        border: 1px solid $grey;
+        border: 1px solid #6B728E;
         padding: 1.5rem;
 
         h2 {
@@ -90,7 +88,7 @@ $grey: #6B728E;
     }
 
     .go-to-login {
-        border: 1px solid $grey;
+        border: 1px solid #6B728E;
         padding: 1rem 1.5rem;
         text-align: center;
 
@@ -111,21 +109,11 @@ $grey: #6B728E;
         }
     }
 
-    @media (max-width: 1440px) {
-        margin-top: 6.5rem;
-    }
-
     @media (max-width: 1024px) {
         width: 40rem;
-        margin-top: 19rem;
-    }
-
-    @media (max-width: 768px) {
-        margin-top: 0;
     }
 
     @media (max-width: 426px) {
-        margin-top: 32rem;
         width: 90%;
 
         .sign-up-form-container {
